@@ -1,12 +1,15 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { FloatingBackground } from "@/components/ui/floating-background";
 import { Hourglass } from "lucide-react";
+import { SiteHeader } from "@/components/site-header";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-900">
       {/* Hero Section with Floating Background */}
       <div className="relative h-screen">
+        <SiteHeader />
         <FloatingBackground />
         <div className="relative flex flex-col items-center justify-center h-full p-4">
           <header className="text-center mb-12">
@@ -23,12 +26,14 @@ export default function Home() {
             <p className="text-white/50">
               Create, manage, and complete your to-do lists with ease.
             </p>
-            <Button
-              className="bg-[#41b869] hover:bg-[#41b869]/90 text-white mt-4 w-full max-w-32 mx-auto"
-              size="sm"
-            >
-              Get Started
-            </Button>
+            <Link href="/dashboard">
+              <Button
+                className="bg-[#41b869] hover:bg-[#41b869]/90 text-white mt-4 w-full max-w-32 mx-auto"
+                size="sm"
+              >
+                Get Started
+              </Button>
+            </Link>
           </header>
 
           <div className="relative w-full max-w-4xl aspect-[1.6] mx-auto">

@@ -55,7 +55,7 @@ export function FloatingBackground() {
       </div>
 
       {/* Grid Pattern - confined to hero section */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#41b86910_1px,transparent_1px),linear-gradient(to_bottom,#41b86910_1px,transparent_1px)] bg-[size:24px_24px]">
+      <div>
         {/* Add a fade-out gradient at the bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-zinc-900 to-transparent"></div>
       </div>
