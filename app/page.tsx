@@ -1,104 +1,131 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 import { FloatingBackground } from "@/components/ui/floating-background";
-import { Hourglass } from "lucide-react";
-import { SiteHeader } from "@/components/site-header";
+import { Trophy, Briefcase, Scale, HelpCircle, DollarSign } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-zinc-900">
-      {/* Hero Section with Floating Background */}
-      <div className="relative h-screen">
-        <SiteHeader />
-        <FloatingBackground />
-        <div className="relative flex flex-col items-center justify-center h-full p-4">
-          <header className="text-center mb-12">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <img
-                className="w-full max-w-[100px]"
-                src="/assets/logo.png"
-                alt="Chimly Logo"
-              />
-            </div>
-            <h1 className="text-4xl font-semibold text-white mb-3">
-              Your tasks, simplified
-            </h1>
-            <p className="text-white/50">
-              Create, manage, and complete your to-do lists with ease.
-            </p>
-            <Link href="/dashboard">
-              <Button
-                className="bg-[#41b869] hover:bg-[#41b869]/90 text-white mt-4 w-full max-w-32 mx-auto"
-                size="sm"
-              >
-                Get Started
-              </Button>
-            </Link>
-          </header>
-
-          <div className="relative w-full max-w-4xl aspect-[1.6] mx-auto">
-            <img
-              src="/assets/dashboard.png"
-              alt="Task Manager Interface"
-              className="w-full h-auto max-h-[50vh] rounded-lg object-cover border-2 border-white/20"
+    <div className="min-h-screen bg-[#003326] bg-gradient-to-b from-[#003326] to-[#001a13]">
+      <div className="relative h-screen flex flex-col">
+        {/* Navbar */}
+        <nav className="relative z-10 flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
+          <Link href="/" className="relative w-24 h-12">
+            <Image
+              src="/assets/logo.png"
+              alt="Chimly logo"
+              fill
+              className="object-contain brightness-0 invert"
             />
-          </div>
-        </div>
-      </div>
-
-      {/* Features Section */}
-      <section className="w-full max-w-7xl mx-auto px-4 py-16">
-        <h2 className="text-3xl font-semibold text-white text-center mb-12">
-          Features that empower you
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="p-6 rounded-xl bg-zinc-800/50 border border-zinc-700/50 
-                        transition-all duration-300 hover:shadow-[0_0_30px_rgba(65,184,105,0.2)]
-                        hover:border-[#41b869]/30 group"
-            >
-              <div className="text-[#41b869] mb-4  transition-transform">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-white/50">{feature.description}</p>
+          </Link>
+          <div className="flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-8">
+              <Link
+                href="#"
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                Achievements
+              </Link>
+              <Link
+                href="#"
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                Our Work
+              </Link>
+              <Link
+                href="#"
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                Comparision
+              </Link>
+              <Link
+                href="#"
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                FAQs
+              </Link>
             </div>
-          ))}
-        </div>
-      </section>
+            <Link
+              href="/login"
+              className="bg-emerald-500 text-white px-6 py-2 rounded-full hover:bg-emerald-600 transition-colors"
+            >
+              Get Started
+            </Link>
+          </div>
+
+          {/* Mobile Navigation Dock */}
+          <div className="fixed bottom-0 left-0 right-0 bg-[#003326]/80 backdrop-blur-lg md:hidden border-t border-white/10 px-6 py-3 z-50">
+            <div className="flex justify-between items-center">
+              <Link href="#" className="flex flex-col items-center">
+                <Trophy className="w-6 h-6 text-white/70" />
+                <span className="text-xs mt-1 text-white/70">Achievements</span>
+              </Link>
+              <Link href="#" className="flex flex-col items-center">
+                <Briefcase className="w-6 h-6 text-white/70" />
+                <span className="text-xs mt-1 text-white/70">Our Work</span>
+              </Link>
+              <Link href="#" className="flex flex-col items-center">
+                <Scale className="w-6 h-6 text-white/70" />
+                <span className="text-xs mt-1 text-white/70">Compare</span>
+              </Link>
+              <Link href="#" className="flex flex-col items-center">
+                <HelpCircle className="w-6 h-6 text-white/70" />
+                <span className="text-xs mt-1 text-white/70">FAQs</span>
+              </Link>
+              <Link href="#" className="flex flex-col items-center">
+                <DollarSign className="w-6 h-6 text-white/70" />
+                <span className="text-xs mt-1 text-white/70">Pricing</span>
+              </Link>
+            </div>
+          </div>
+        </nav>
+
+        <FloatingBackground />
+
+        {/* Hero Section */}
+        <main className="flex-1 flex flex-col items-center justify-center text-center px-4 -pt-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8">
+            <div className="relative flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white tracking-tight font-medium px-4 py-2 lg:px-6 lg:py-3 rounded-full text-sm lg:text-base group">
+              {/* Shimmer border */}
+              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent bg-[length:400%_100%] animate-[border-rotate_4s_linear_infinite]" />
+
+              {/* Content */}
+              <span className="inline-flex items-center gap-2 relative">
+                <span className="text-emerald-400">✨</span>
+                Simplify your workflow now
+              </span>
+            </div>
+          </div>
+
+          <h1 className="text-5xl text-white md:text-8xl font-bold leading-none tracking-tighter mb-6 max-w-4xl mx-auto">
+            Multitask Like a Pro <br /> with{" "}
+            <span className="relative inline-block">
+              {/* Glow effect behind */}
+              <span className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-300 blur-2xl opacity-40 animate-gradient-x"></span>
+
+              {/* Text with clipped gradient and shimmer */}
+              <span className="relative">
+                <span className="font-fancy bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-300 animate-gradient-x">
+                  Chimly AI
+                </span>
+                <span className="absolute inset-0 bg-clip-text text-transparent bg-gradient-to-r from-transparent via-emerald-100/50 to-transparent bg-[length:200%] animate-shimmer"></span>
+              </span>
+            </span>
+          </h1>
+
+          <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto tracking-tight leading-tight">
+            We don't just design, we solve your brand's <br />
+            biggest challenges
+          </p>
+
+          <Link
+            href="#"
+            className="inline-flex bg-white text-[#003326] px-8 py-3 rounded-full hover:bg-white/90 transition-colors"
+          >
+            View Plans and Pricing
+          </Link>
+        </main>
+      </div>
     </div>
   );
 }
-
-const features = [
-  {
-    icon: (
-      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
-      </svg>
-    ),
-    title: "Smart Task Management",
-    description:
-      "Organize your tasks with intelligent categorization and priority settings.",
-  },
-  {
-    icon: <Hourglass />,
-    title: "Time Tracking",
-    description:
-      "Track time spent on tasks and analyze your productivity patterns.",
-  },
-  {
-    icon: (
-      <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92zM18 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM6 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm12 7.02c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z" />
-      </svg>
-    ),
-    title: "Collaboration Tools",
-    description:
-      "Share and collaborate on tasks with team members in real-time.",
-  },
-];

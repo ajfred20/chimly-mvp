@@ -1,8 +1,8 @@
-import { Sora } from "next/font/google";
+import { Inter } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
-const inter = Sora({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
