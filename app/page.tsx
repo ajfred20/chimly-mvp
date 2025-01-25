@@ -114,15 +114,15 @@ export default function Home() {
           </h1>
 
           <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto tracking-tight leading-tight">
-            We don't just design, we solve your brand's <br />
-            biggest challenges
+            Handle your daily tasks like a pro with <br />
+            our loaded ai features
           </p>
 
           <Link
-            href="#"
+            href="/dashboard"
             className="inline-flex bg-white text-[#003326] px-8 py-3 rounded-full hover:bg-white/90 transition-colors"
           >
-            View Plans and Pricing
+            View Dashboard
           </Link>
         </main>
       </div>
