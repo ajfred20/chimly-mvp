@@ -1,8 +1,7 @@
-import { Inter } from "next/font/google";
-import { SiteHeader } from "@/components/site-header";
+import { Onest } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Onest({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,

@@ -1,4 +1,3 @@
-import { Sidebar } from "@/components/ui/sidebar";
 import { Bell } from "lucide-react";
 
 export default function DashboardLayout({
@@ -7,8 +6,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen bg-[#1E1F1E] text-white font-satoshi">
-      <Sidebar />
+    <div className="flex h-screen bg-[#1E1F1E] text-white">
       <main className="flex flex-col flex-1 relative">
         <header className="flex items-center justify-between p-4 border-b border-[#2A2B2A]">
           <button className="p-2 text-gray-400 hover:text-white transition-colors">
