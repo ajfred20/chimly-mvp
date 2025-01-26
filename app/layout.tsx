@@ -1,8 +1,5 @@
-import { Onest } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css";
-
-const inter = Onest({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Chimly AI | Your AI-Powered Task Assistant",
@@ -52,7 +49,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

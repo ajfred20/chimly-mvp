@@ -6,7 +6,10 @@ import { Trophy, Briefcase, Scale, HelpCircle, DollarSign } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#003326] bg-gradient-to-b from-[#003326] to-[#001a13]">
+    <div
+      className="min-h-screen"
+      style={{ backgroundImage: "url('/assets/hero-bg.png')" }}
+    >
       <div className="relative h-screen flex flex-col">
         {/* Navbar */}
         <nav className="relative z-10 flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full">
@@ -24,19 +27,25 @@ export default function Home() {
                 href="#"
                 className="text-white/70 hover:text-white transition-colors"
               >
-                Achievements
+                Features
               </Link>
               <Link
                 href="#"
                 className="text-white/70 hover:text-white transition-colors"
               >
-                Our Work
+                About Us
               </Link>
               <Link
                 href="#"
                 className="text-white/70 hover:text-white transition-colors"
               >
-                Comparision
+                How To Use
+              </Link>
+              <Link
+                href="#"
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                Pricing
               </Link>
               <Link
                 href="#"
@@ -106,7 +115,7 @@ export default function Home() {
               {/* Text with clipped gradient and shimmer */}
               <span className="relative">
                 <span className="font-fancy bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-300 animate-gradient-x">
-                  Chimly AI
+                  Chimly
                 </span>
                 <span className="absolute inset-0 bg-clip-text text-transparent bg-gradient-to-r from-transparent via-emerald-100/50 to-transparent bg-[length:200%] animate-shimmer"></span>
               </span>
@@ -125,6 +134,82 @@ export default function Home() {
             View Dashboard
           </Link>
         </main>
+
+        {/* Achievements Section */}
+        <section className="py-24 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-white mb-2 tracking-tight">
+                Our Features
+              </h2>
+              <p className="text-gray-400 text-lg">
+                Wanna have a look at some of the features of our AI. Well we
+                would love to <br />
+                give you a tour
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Project Card 1 */}
+              <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors group">
+                <div className="aspect-video mb-6 overflow-hidden rounded-lg">
+                  <Image
+                    src="/assets/project-1.png"
+                    alt="Project showcase"
+                    width={400}
+                    height={300}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  10+ Projects
+                </h3>
+                <p className="text-gray-400">
+                  Helping businesses across various industries achieve their
+                  goals
+                </p>
+              </div>
+
+              {/* Project Card 2 */}
+              <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors group">
+                <div className="aspect-video mb-6 overflow-hidden rounded-lg">
+                  <Image
+                    src="/assets/project-2.png"
+                    alt="Web Design Process"
+                    width={400}
+                    height={300}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  5+ Projects
+                </h3>
+                <p className="text-gray-400">
+                  A brief description of the web design process achievement.
+                </p>
+              </div>
+
+              {/* Project Card 3 */}
+              <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors group">
+                <div className="aspect-video mb-6 overflow-hidden rounded-lg">
+                  <Image
+                    src="/assets/project-3.png"
+                    alt="Savings Graph"
+                    width={400}
+                    height={300}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  20% Increase
+                </h3>
+                <p className="text-gray-400">
+                  A brief description of the savings achievement.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
