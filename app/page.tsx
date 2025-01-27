@@ -20,31 +20,7 @@ export default function Home() {
                 className="w-full max-w-[100px] sm:max-w-[150px]"
               />
             </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link
-                href="#"
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                Achievements
-              </Link>
-              <Link
-                href="#"
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                Our Work
-              </Link>
-              <Link
-                href="#"
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                Comparision
-              </Link>
-              <Link
-                href="#"
-                className="text-white/70 hover:text-white transition-colors"
-              >
-                FAQs
-              </Link>
+            <div className="flex items-center">
               <Link
                 href="/waitlist"
                 className="bg-black text-white px-4 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-colors"
@@ -73,7 +49,7 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+          <h1 className="text-4xl md:text-7xl font-bold text-white mb-6 tracking-tight z-10">
             Increase your Team&apos;s <br />
             Productivity,{" "}
             <span className="relative inline-block">
@@ -86,33 +62,37 @@ export default function Home() {
             With our AI-powered tools, you can automate repetitive tasks,
             streamline workflows, and boost your team&apos;s efficiency.
           </p>
+
+          {/* Get Started Button */}
           <Link
             href="/waitlist"
             className="inline-flex bg-white text-black px-8 py-3 rounded-full hover:bg-white/90 transition-colors font-medium"
           >
             Get Started
           </Link>
-        </div>
 
-        {/* Feature Pills */}
-        <div className="absolute bottom-10 sm:bottom-20 left-1/2 -translate-x-1/2 flex flex-col sm:flex-row items-center gap-2 sm:gap-4 md:gap-8">
-          <div className="flex items-center gap-1 sm:gap-2 bg-white/5 backdrop-blur-sm px-2 py-1 sm:px-4 sm:py-2 rounded-full border border-white/10">
-            <Clock className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400" />
-            <span className="text-white text-xs sm:text-sm">
-              48 Hours Delivery
-            </span>
-          </div>
-          <div className="flex items-center gap-1 sm:gap-2 bg-white/5 backdrop-blur-sm px-2 py-1 sm:px-4 sm:py-2 rounded-full border border-white/10">
-            <Layers className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400" />
-            <span className="text-white text-xs sm:text-sm">
-              Access to Private AI Portal
-            </span>
-          </div>
-          <div className="flex items-center gap-1 sm:gap-2 bg-white/5 backdrop-blur-sm px-2 py-1 sm:px-4 sm:py-2 rounded-full border border-white/10">
-            <Plus className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400" />
-            <span className="text-white text-xs sm:text-sm">
-              Unlimited AI Requests
-            </span>
+          {/* Feature Pills */}
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-2">
+            <div className="flex items-center gap-2 bg-zinc-900/80 backdrop-blur-sm px-4 py-1.5 rounded-full border border-zinc-800 text-xs sm:text-sm">
+              <Clock className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-white whitespace-nowrap">
+                48 Hours Delivery
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 bg-zinc-900/80 backdrop-blur-sm px-4 py-1.5 rounded-full border border-zinc-800 text-xs sm:text-sm">
+              <Layers className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-white whitespace-nowrap">
+                Access to Private AI Portal
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 bg-zinc-900/80 backdrop-blur-sm px-4 py-1.5 rounded-full border border-zinc-800 text-xs sm:text-sm">
+              <Plus className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-white whitespace-nowrap">
+                Unlimited AI Requests
+              </span>
+            </div>
           </div>
         </div>
       </div>
