@@ -838,72 +838,60 @@ export default function Home() {
             {/* FAQ Item 1 */}
             <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
               <h3 className="text-xl font-semibold text-white mb-3">
-                What is Chimly AI?
+                How does AI-driven task tracking work?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Chimly AI is an intelligent assistant designed to help teams
-                streamline their workflows, automate repetitive tasks, and boost
-                productivity through AI-powered solutions.
+                Our AI system automatically monitors your tasks, categorizes them based on priority and type, and provides intelligent insights about your work patterns. It learns from your behavior to make task management more efficient over time.
               </p>
             </div>
 
             {/* FAQ Item 2 */}
             <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
               <h3 className="text-xl font-semibold text-white mb-3">
-                How does the 48-hour delivery work?
+                What makes the smart prioritization system unique?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Once you submit your request, our AI system processes and
-                delivers results within 48 hours. For most tasks, you'll receive
-                results much sooner, often within hours.
+                Our smart prioritization uses machine learning to understand your work patterns, deadlines, and task importance. It automatically suggests the most optimal task order and adjusts in real-time based on changing priorities.
               </p>
             </div>
 
             {/* FAQ Item 3 */}
             <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
               <h3 className="text-xl font-semibold text-white mb-3">
-                What's included in the Private AI Portal?
+                How does real-time progress tracking benefit me?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                The Private AI Portal gives you access to advanced AI features,
-                custom workflows, analytics dashboard, and priority support.
-                It's your command center for all AI operations.
+                Real-time progress tracking provides instant visibility into your task completion rates, productivity patterns, and project milestones. This helps you stay on top of deadlines and identify areas for improvement.
               </p>
             </div>
 
             {/* FAQ Item 4 */}
             <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
               <h3 className="text-xl font-semibold text-white mb-3">
-                Are there any usage limits?
+                What is adaptive learning in Chimly?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                No, we offer unlimited AI requests with all our plans. However,
-                we implement fair usage policies to ensure optimal performance
-                for all users.
+                Adaptive learning means our AI continuously learns from your work habits, preferences, and successful patterns. It adapts its recommendations and automations to become more personalized and effective over time.
               </p>
             </div>
 
             {/* FAQ Item 5 */}
             <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
               <h3 className="text-xl font-semibold text-white mb-3">
-                How secure is my data?
+                How do accountability nudges work?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                We implement enterprise-grade security measures, including
-                end-to-end encryption, secure data storage, and regular security
-                audits to protect your information.
+                Our accountability system sends smart, personalized reminders based on your work patterns and preferences. These gentle nudges help you stay on track without being intrusive, adapting to when you're most productive.
               </p>
             </div>
 
             {/* FAQ Item 6 */}
             <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
               <h3 className="text-xl font-semibold text-white mb-3">
-                Can I integrate Chimly with other tools?
+                Can I collaborate across different platforms?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Yes, Chimly offers seamless integration with popular tools like
-                Slack, GitHub, and more. We also provide APIs for custom
-                integrations.
+                Yes! Chimly supports cross-platform collaboration with real-time syncing across all devices. Whether you're on desktop, mobile, or web, your tasks and progress are always up-to-date and accessible to your team.
               </p>
             </div>
           </div>
