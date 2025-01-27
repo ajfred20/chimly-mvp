@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description: "Simplify your life, one task at a time",
     images: [
       {
-        url: "/assets/chimly.png", // Make sure to add this image to your public/assets folder
+        url: "/assets/chimly.png",
         width: 1200,
         height: 630,
         alt: "Chimly AI",
