@@ -15,23 +15,21 @@ export const metadata: Metadata = {
     url: "https://chimly.vercel.app",
     siteName: "Chimly AI",
     title: "Chimly AI | Your AI-Powered Task Assistant",
-    description:
-      "Handle your daily tasks like a pro with our loaded AI features",
+    description: "Simplify your life, one task at a time",
     images: [
       {
-        url: "/assets/logo.png", // Make sure to add this image to your public/assets folder
+        url: "/assets/chimly.png", // Make sure to add this image to your public/assets folder
         width: 1200,
         height: 630,
-        alt: "Chimly AI Dashboard Preview",
+        alt: "Chimly AI",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Chimly AI | Your AI-Powered Task Assistant",
-    description:
-      "Handle your daily tasks like a pro with our loaded AI features",
-    images: ["/assets/logo.png"],
+    description: "Simplify your life, one task at a time",
+    images: ["/assets/chimly.png"],
     creator: "@iamajfred_",
   },
   icons: {
