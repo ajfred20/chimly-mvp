@@ -303,6 +303,102 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQs Section */}
+      <section className="py-24 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-zinc-400 text-lg">
+              Everything you need to know about Chimly AI
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* FAQ Item 1 */}
+            <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
+              <h3 className="text-xl font-semibold text-white mb-3">
+                What is Chimly AI?
+              </h3>
+              <p className="text-zinc-400 leading-relaxed">
+                Chimly AI is an intelligent assistant designed to help teams streamline their workflows, 
+                automate repetitive tasks, and boost productivity through AI-powered solutions.
+              </p>
+            </div>
+
+            {/* FAQ Item 2 */}
+            <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
+              <h3 className="text-xl font-semibold text-white mb-3">
+                How does the 48-hour delivery work?
+              </h3>
+              <p className="text-zinc-400 leading-relaxed">
+                Once you submit your request, our AI system processes and delivers results within 48 hours. 
+                For most tasks, you'll receive results much sooner, often within hours.
+              </p>
+            </div>
+
+            {/* FAQ Item 3 */}
+            <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
+              <h3 className="text-xl font-semibold text-white mb-3">
+                What's included in the Private AI Portal?
+              </h3>
+              <p className="text-zinc-400 leading-relaxed">
+                The Private AI Portal gives you access to advanced AI features, custom workflows, 
+                analytics dashboard, and priority support. It's your command center for all AI operations.
+              </p>
+            </div>
+
+            {/* FAQ Item 4 */}
+            <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
+              <h3 className="text-xl font-semibold text-white mb-3">
+                Are there any usage limits?
+              </h3>
+              <p className="text-zinc-400 leading-relaxed">
+                No, we offer unlimited AI requests with all our plans. However, we implement fair usage 
+                policies to ensure optimal performance for all users.
+              </p>
+            </div>
+
+            {/* FAQ Item 5 */}
+            <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
+              <h3 className="text-xl font-semibold text-white mb-3">
+                How secure is my data?
+              </h3>
+              <p className="text-zinc-400 leading-relaxed">
+                We implement enterprise-grade security measures, including end-to-end encryption, 
+                secure data storage, and regular security audits to protect your information.
+              </p>
+            </div>
+
+            {/* FAQ Item 6 */}
+            <div className="bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-6 hover:border-emerald-500/20 transition-colors">
+              <h3 className="text-xl font-semibold text-white mb-3">
+                Can I integrate Chimly with other tools?
+              </h3>
+              <p className="text-zinc-400 leading-relaxed">
+                Yes, Chimly offers seamless integration with popular tools like Slack, GitHub, and more. 
+                We also provide APIs for custom integrations.
+              </p>
+            </div>
+          </div>
+
+          {/* Still Have Questions */}
+          <div className="mt-12 text-center">
+            <p className="text-zinc-400 mb-4">
+              Still have questions? We're here to help.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors"
+            >
+              Contact Support
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-24 px-4">
         <div className="max-w-6xl mx-auto text-center">
