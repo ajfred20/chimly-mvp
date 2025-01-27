@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { FloatingBackground } from "@/components/ui/floating-background";
-import { Clock, Layers, Plus } from "lucide-react";
+import { Clock, Layers, Plus, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -321,6 +322,91 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* CTA Section */}
+      <section className="py-24 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="relative group overflow-hidden bg-zinc-900/50 border border-zinc-800/50 rounded-2xl p-8 md:p-12 backdrop-blur-sm">
+            {/* Flickering Grid Background */}
+            <div className="absolute inset-0 grid-pattern opacity-40 group-hover:opacity-60 transition-opacity" />
+
+            {/* Content */}
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Ready to Transform Your Workflow?
+              </h2>
+              <p className="text-zinc-400 text-lg mb-8 max-w-2xl mx-auto">
+                Join thousands of teams who have already revolutionized their
+                productivity with Chimly AI.
+              </p>
+              <Link
+                href="/waitlist"
+                className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-full hover:bg-white/90 transition-colors font-medium group"
+              >
+                Get Started
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-4 border-t border-zinc-800/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Left Side - Company and Year */}
+            <div className="flex items-center gap-2">
+              <img
+                src="/assets/logo.png"
+                alt="Chimly"
+                className="brightness-0 invert w-full max-w-[70px] sm:max-w-[100px]"
+              />
+              <div className="flex items-center gap-2">
+                <span className="text-zinc-500">•</span>
+                <span className="text-zinc-500">
+                  {new Date().getFullYear()}
+                </span>
+              </div>
+            </div>
+
+            {/* Center - Links */}
+            <div className="flex items-center gap-6 text-sm text-zinc-400 order-first sm:order-none w-full sm:w-auto justify-center">
+              <Link
+                href="/privacy"
+                className="hover:text-white transition-colors"
+              >
+                Privacy
+              </Link>
+              <Link
+                href="/terms"
+                className="hover:text-white transition-colors"
+              >
+                Terms
+              </Link>
+              <Link
+                href="/contact"
+                className="hover:text-white transition-colors"
+              >
+                Contact
+              </Link>
+            </div>
+
+            {/* Right Side - Credit */}
+            <p className="text-zinc-500 text-sm">
+              Built with ❤️ by{" "}
+              <Link
+                href="https://x.com/iamajfred_"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-400 hover:text-emerald-300 transition-colors"
+              >
+                Aj Fred
+              </Link>
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
