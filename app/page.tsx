@@ -2,7 +2,15 @@
 
 import Link from "next/link";
 import { FloatingBackground } from "@/components/ui/floating-background";
-import { Clock, Layers, Plus, ArrowRight } from "lucide-react";
+import {
+  Clock,
+  Layers,
+  Plus,
+  ArrowRight,
+  Sparkles,
+  User2,
+  MessageSquare,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -74,23 +82,23 @@ export default function Home() {
           {/* Feature Pills */}
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-2">
             <div className="flex items-center gap-2 bg-zinc-900/80 backdrop-blur-sm px-4 py-1.5 rounded-full border border-zinc-800 text-xs sm:text-sm">
-              <Clock className="w-3.5 h-3.5 text-emerald-400" />
+              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
               <span className="text-white whitespace-nowrap">
-                48 Hours Delivery
+                AI Productivity Agent
               </span>
             </div>
 
             <div className="flex items-center gap-2 bg-zinc-900/80 backdrop-blur-sm px-4 py-1.5 rounded-full border border-zinc-800 text-xs sm:text-sm">
-              <Layers className="w-3.5 h-3.5 text-emerald-400" />
+              <User2 className="w-3.5 h-3.5 text-emerald-400" />
               <span className="text-white whitespace-nowrap">
-                Access to Private AI Portal
+                Prioritize Your Tasks
               </span>
             </div>
 
             <div className="flex items-center gap-2 bg-zinc-900/80 backdrop-blur-sm px-4 py-1.5 rounded-full border border-zinc-800 text-xs sm:text-sm">
-              <Plus className="w-3.5 h-3.5 text-emerald-400" />
+              <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
               <span className="text-white whitespace-nowrap">
-                Unlimited AI Requests
+                Personalized Conversations
               </span>
             </div>
           </div>
@@ -458,7 +466,7 @@ export default function Home() {
                       Team
                     </h3>
                     <div className="flex items-baseline gap-2 mb-4">
-                      <span className="text-4xl font-bold text-white">$35</span>
+                      <span className="text-4xl font-bold text-white">$20</span>
                       <span className="text-zinc-400">/month</span>
                     </div>
                     <p className="text-zinc-400">
@@ -566,7 +574,7 @@ export default function Home() {
                       Enterprise
                     </h3>
                     <div className="flex items-baseline gap-2 mb-4">
-                      <span className="text-4xl font-bold text-white">$70</span>
+                      <span className="text-4xl font-bold text-white">$40</span>
                       <span className="text-zinc-400">/month</span>
                     </div>
                     <p className="text-zinc-400">
@@ -841,7 +849,10 @@ export default function Home() {
                 How does AI-driven task tracking work?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Our AI system automatically monitors your tasks, categorizes them based on priority and type, and provides intelligent insights about your work patterns. It learns from your behavior to make task management more efficient over time.
+                Our AI system automatically monitors your tasks, categorizes
+                them based on priority and type, and provides intelligent
+                insights about your work patterns. It learns from your behavior
+                to make task management more efficient over time.
               </p>
             </div>
 
@@ -851,7 +862,10 @@ export default function Home() {
                 What makes the smart prioritization system unique?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Our smart prioritization uses machine learning to understand your work patterns, deadlines, and task importance. It automatically suggests the most optimal task order and adjusts in real-time based on changing priorities.
+                Our smart prioritization uses machine learning to understand
+                your work patterns, deadlines, and task importance. It
+                automatically suggests the most optimal task order and adjusts
+                in real-time based on changing priorities.
               </p>
             </div>
 
@@ -861,7 +875,10 @@ export default function Home() {
                 How does real-time progress tracking benefit me?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Real-time progress tracking provides instant visibility into your task completion rates, productivity patterns, and project milestones. This helps you stay on top of deadlines and identify areas for improvement.
+                Real-time progress tracking provides instant visibility into
+                your task completion rates, productivity patterns, and project
+                milestones. This helps you stay on top of deadlines and identify
+                areas for improvement.
               </p>
             </div>
 
@@ -871,7 +888,10 @@ export default function Home() {
                 What is adaptive learning in Chimly?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Adaptive learning means our AI continuously learns from your work habits, preferences, and successful patterns. It adapts its recommendations and automations to become more personalized and effective over time.
+                Adaptive learning means our AI continuously learns from your
+                work habits, preferences, and successful patterns. It adapts its
+                recommendations and automations to become more personalized and
+                effective over time.
               </p>
             </div>
 
@@ -881,7 +901,10 @@ export default function Home() {
                 How do accountability nudges work?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Our accountability system sends smart, personalized reminders based on your work patterns and preferences. These gentle nudges help you stay on track without being intrusive, adapting to when you're most productive.
+                Our accountability system sends smart, personalized reminders
+                based on your work patterns and preferences. These gentle nudges
+                help you stay on track without being intrusive, adapting to when
+                you're most productive.
               </p>
             </div>
 
@@ -891,7 +914,10 @@ export default function Home() {
                 Can I collaborate across different platforms?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Yes! Chimly supports cross-platform collaboration with real-time syncing across all devices. Whether you're on desktop, mobile, or web, your tasks and progress are always up-to-date and accessible to your team.
+                Yes! Chimly supports cross-platform collaboration with real-time
+                syncing across all devices. Whether you're on desktop, mobile,
+                or web, your tasks and progress are always up-to-date and
+                accessible to your team.
               </p>
             </div>
           </div>
