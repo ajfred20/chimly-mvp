@@ -150,16 +150,535 @@ export default function Home() {
           {/* Vision Statement */}
           <div className="mt-16 text-center">
             <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-              Our vision is to{" "}
+              Our vision is to build a world where{" "}
               <span className="text-emerald-400 font-semibold">
-                revolutionize
+                Chimly becomes the intelligent backbone of human productivity.
               </span>{" "}
-              how teams work by providing{" "}
+              Not just a tool but a transformative platform{" "}
               <span className="text-emerald-400 font-semibold">
-                intelligent solutions
+                that understands and adapts to how people and organizations
               </span>{" "}
-              that adapt to your unique needs.
+              truly work
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Key Features Section */}
+      <section className="py-24 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              Key Features
+            </h2>
+            <p className="text-zinc-400 text-lg">
+              Supercharge your productivity with AI-powered task management
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* AI-Driven Task Tracking */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-zinc-800/50 to-zinc-900/50 border border-zinc-800/50 p-8 hover:border-emerald-500/20 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-500">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  AI-Driven Task Tracking
+                </h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  Intelligent task monitoring that automatically categorizes and
+                  tracks your progress, making task management effortless.
+                </p>
+              </div>
+            </div>
+
+            {/* Smart Prioritization */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-zinc-800/50 to-zinc-900/50 border border-zinc-800/50 p-8 hover:border-emerald-500/20 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-500">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  Smart Prioritization
+                </h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  AI-powered system that learns your work patterns and
+                  automatically prioritizes tasks for maximum productivity.
+                </p>
+              </div>
+            </div>
+
+            {/* Real-Time Progress Tracking */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-zinc-800/50 to-zinc-900/50 border border-zinc-800/50 p-8 hover:border-emerald-500/20 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-500">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  Real-Time Progress Tracking
+                </h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  Monitor your progress in real-time with detailed insights and
+                  visual analytics to stay on top of your goals.
+                </p>
+              </div>
+            </div>
+
+            {/* Adaptive Learning */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-zinc-800/50 to-zinc-900/50 border border-zinc-800/50 p-8 hover:border-emerald-500/20 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-500">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  Adaptive Learning
+                </h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  Our AI continuously learns from your work habits to provide
+                  increasingly personalized and effective task management.
+                </p>
+              </div>
+            </div>
+
+            {/* Personalized Accountability */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-zinc-800/50 to-zinc-900/50 border border-zinc-800/50 p-8 hover:border-emerald-500/20 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-500">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  Personalized Accountability
+                </h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  Smart nudges and reminders that keep you on track, tailored to
+                  your working style and preferences.
+                </p>
+              </div>
+            </div>
+
+            {/* Cross-Platform Collaboration */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-zinc-800/50 to-zinc-900/50 border border-zinc-800/50 p-8 hover:border-emerald-500/20 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-500">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  Cross-Platform Collaboration
+                </h3>
+                <p className="text-zinc-400 leading-relaxed">
+                  Seamlessly work across all your devices with real-time syncing
+                  and collaborative features built-in.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-24 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight text-white mb-4">
+              Simplify Your Life, One Task at a Time
+            </h2>
+            <p className="text-zinc-400 text-lg">
+              Choose the perfect plan for your needs
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Basic Plan */}
+            <div className="relative group">
+              <div className="absolute inset-0.5 bg-gradient-to-t from-emerald-500 to-emerald-400 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-300" />
+              <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-8 h-full">
+                <div className="flex flex-col h-full">
+                  <div className="mb-8">
+                    <h3 className="text-xl font-semibold text-white mb-2">
+                      Individual
+                    </h3>
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <span className="text-4xl font-bold text-white">$10</span>
+                      <span className="text-zinc-400">/month</span>
+                    </div>
+                    <p className="text-zinc-400">
+                      Perfect for individual users and small projects.
+                    </p>
+                  </div>
+
+                  <ul className="space-y-4 mb-8 flex-grow">
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      AI Task Tracking
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Smart Scheduling
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Personalized Accountability
+                    </li>
+                  </ul>
+
+                  <button className="w-full bg-white/10 text-white py-2 rounded-lg hover:bg-white/20 transition-colors">
+                    Get Started
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Pro Plan - Featured */}
+            <div className="relative group">
+              <div className="absolute inset-0.5 bg-gradient-to-t from-emerald-500 to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-40 transition duration-300" />
+              <div className="relative bg-zinc-900 border border-emerald-500/20 rounded-2xl p-8 h-full">
+                <div className="absolute top-0 right-6 -translate-y-1/2">
+                  <span className="bg-emerald-500 text-black text-sm font-medium px-3 py-1 rounded-full">
+                    Popular
+                  </span>
+                </div>
+                <div className="flex flex-col h-full">
+                  <div className="mb-8">
+                    <h3 className="text-xl font-semibold text-white mb-2">
+                      Team
+                    </h3>
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <span className="text-4xl font-bold text-white">$35</span>
+                      <span className="text-zinc-400">/month</span>
+                    </div>
+                    <p className="text-zinc-400">
+                      Ideal for teams and growing businesses.
+                    </p>
+                  </div>
+
+                  <ul className="space-y-4 mb-8 flex-grow">
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Everything in Basic
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Cross-Platform Collaboration
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      AI Accountability Agemt
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Smart Prioritization
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Team Support
+                    </li>
+                  </ul>
+
+                  <button className="w-full bg-emerald-500 text-black py-2 rounded-lg hover:bg-emerald-400 transition-colors font-medium">
+                    Get Started
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Enterprise Plan */}
+            <div className="relative group">
+              <div className="absolute inset-0.5 bg-gradient-to-t from-emerald-500 to-emerald-400 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-300" />
+              <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-8 h-full">
+                <div className="flex flex-col h-full">
+                  <div className="mb-8">
+                    <h3 className="text-xl font-semibold text-white mb-2">
+                      Enterprise
+                    </h3>
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <span className="text-4xl font-bold text-white">$70</span>
+                      <span className="text-zinc-400">/month</span>
+                    </div>
+                    <p className="text-zinc-400">
+                      Advanced features for larger organizations.
+                    </p>
+                  </div>
+
+                  <ul className="space-y-4 mb-8 flex-grow">
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Everything in Pro
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Comprehensive User Analytics
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Unlimited AI Requests
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Custom Workflow & Predictive Insights
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Enterprise Grade Security
+                    </li>
+                    <li className="flex items-center gap-3 text-zinc-300">
+                      <svg
+                        className="w-5 h-5 text-emerald-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Dedicated Support
+                    </li>
+                  </ul>
+
+                  <button className="w-full bg-white/10 text-white py-2 rounded-lg hover:bg-white/20 transition-colors">
+                    Contact Sales
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -322,8 +841,9 @@ export default function Home() {
                 What is Chimly AI?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Chimly AI is an intelligent assistant designed to help teams streamline their workflows, 
-                automate repetitive tasks, and boost productivity through AI-powered solutions.
+                Chimly AI is an intelligent assistant designed to help teams
+                streamline their workflows, automate repetitive tasks, and boost
+                productivity through AI-powered solutions.
               </p>
             </div>
 
@@ -333,8 +853,9 @@ export default function Home() {
                 How does the 48-hour delivery work?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Once you submit your request, our AI system processes and delivers results within 48 hours. 
-                For most tasks, you'll receive results much sooner, often within hours.
+                Once you submit your request, our AI system processes and
+                delivers results within 48 hours. For most tasks, you'll receive
+                results much sooner, often within hours.
               </p>
             </div>
 
@@ -344,8 +865,9 @@ export default function Home() {
                 What's included in the Private AI Portal?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                The Private AI Portal gives you access to advanced AI features, custom workflows, 
-                analytics dashboard, and priority support. It's your command center for all AI operations.
+                The Private AI Portal gives you access to advanced AI features,
+                custom workflows, analytics dashboard, and priority support.
+                It's your command center for all AI operations.
               </p>
             </div>
 
@@ -355,8 +877,9 @@ export default function Home() {
                 Are there any usage limits?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                No, we offer unlimited AI requests with all our plans. However, we implement fair usage 
-                policies to ensure optimal performance for all users.
+                No, we offer unlimited AI requests with all our plans. However,
+                we implement fair usage policies to ensure optimal performance
+                for all users.
               </p>
             </div>
 
@@ -366,8 +889,9 @@ export default function Home() {
                 How secure is my data?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                We implement enterprise-grade security measures, including end-to-end encryption, 
-                secure data storage, and regular security audits to protect your information.
+                We implement enterprise-grade security measures, including
+                end-to-end encryption, secure data storage, and regular security
+                audits to protect your information.
               </p>
             </div>
 
@@ -377,8 +901,9 @@ export default function Home() {
                 Can I integrate Chimly with other tools?
               </h3>
               <p className="text-zinc-400 leading-relaxed">
-                Yes, Chimly offers seamless integration with popular tools like Slack, GitHub, and more. 
-                We also provide APIs for custom integrations.
+                Yes, Chimly offers seamless integration with popular tools like
+                Slack, GitHub, and more. We also provide APIs for custom
+                integrations.
               </p>
             </div>
           </div>
