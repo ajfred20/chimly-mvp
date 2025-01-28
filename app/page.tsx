@@ -592,6 +592,145 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials Marquee */}
+      <section className="w-full py-16 bg-zinc-900/50 border-t border-b border-zinc-800/50 overflow-hidden">
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            Trusted by Teams Worldwide
+          </h2>
+          <p className="text-zinc-400">
+            See what our users have to say about Chimly
+          </p>
+        </div>
+
+        {/* Marquee Container */}
+        <div className="relative">
+          {/* Gradient Overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-black to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-black to-transparent z-10"></div>
+
+          {/* Scrolling Content */}
+          <motion.div
+            className="flex"
+            animate={{
+              x: [0, -1035],
+            }}
+            transition={{
+              duration: 20,
+              ease: "linear",
+              repeat: Infinity,
+            }}
+          >
+            {/* First Set */}
+            <div className="flex gap-6 px-6">
+              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
+                <p className="text-white/80 mb-4">
+                  "Chimly has transformed how our team collaborates. The AI
+                  features are incredibly intuitive."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                    <span className="text-emerald-500 font-semibold">JD</span>
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">John Doe</p>
+                    <p className="text-zinc-500 text-sm">
+                      Product Manager, Tech Co
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
+                <p className="text-white/80 mb-4">
+                  "The automation features have saved us countless hours. It's
+                  like having an extra team member."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                    <span className="text-emerald-500 font-semibold">AS</span>
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">Alice Smith</p>
+                    <p className="text-zinc-500 text-sm">CEO, StartupX</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
+                <p className="text-white/80 mb-4">
+                  "Our productivity has increased by 40% since implementing
+                  Chimly. The results speak for themselves."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                    <span className="text-emerald-500 font-semibold">RJ</span>
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">Robert Johnson</p>
+                    <p className="text-zinc-500 text-sm">Team Lead, Agency Y</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Duplicate Set for Seamless Loop */}
+            <div className="flex gap-6 px-6">
+              {/* Same testimonials repeated */}
+              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
+                <p className="text-white/80 mb-4">
+                  "Chimly has transformed how our team collaborates. The AI
+                  features are incredibly intuitive."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                    <span className="text-emerald-500 font-semibold">JD</span>
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">John Doe</p>
+                    <p className="text-zinc-500 text-sm">
+                      Product Manager, Tech Co
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
+                <p className="text-white/80 mb-4">
+                  "The automation features have saved us countless hours. It's
+                  like having an extra team member."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                    <span className="text-emerald-500 font-semibold">AS</span>
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">Alice Smith</p>
+                    <p className="text-zinc-500 text-sm">CEO, StartupX</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
+                <p className="text-white/80 mb-4">
+                  "Our productivity has increased by 40% since implementing
+                  Chimly. The results speak for themselves."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                    <span className="text-emerald-500 font-semibold">RJ</span>
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">Robert Johnson</p>
+                    <p className="text-zinc-500 text-sm">Team Lead, Agency Y</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
       <section className="py-24 px-4">
         <div className="max-w-6xl mx-auto">
@@ -920,146 +1059,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Testimonials Marquee */}
-      <section className="w-full py-16 bg-zinc-900/50 border-t border-b border-zinc-800/50 overflow-hidden">
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Trusted by Teams Worldwide
-          </h2>
-          <p className="text-zinc-400">
-            See what our users have to say about Chimly
-          </p>
-        </div>
-
-        {/* Marquee Container */}
-        <div className="relative">
-          {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-black to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-black to-transparent z-10"></div>
-
-          {/* Scrolling Content */}
-          <motion.div
-            className="flex"
-            animate={{
-              x: [0, -1035],
-            }}
-            transition={{
-              duration: 20,
-              ease: "linear",
-              repeat: Infinity,
-            }}
-          >
-            {/* First Set */}
-            <div className="flex gap-6 px-6">
-              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
-                <p className="text-white/80 mb-4">
-                  "Chimly has transformed how our team collaborates. The AI
-                  features are incredibly intuitive."
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="text-emerald-500 font-semibold">JD</span>
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">John Doe</p>
-                    <p className="text-zinc-500 text-sm">
-                      Product Manager, Tech Co
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
-                <p className="text-white/80 mb-4">
-                  "The automation features have saved us countless hours. It's
-                  like having an extra team member."
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="text-emerald-500 font-semibold">AS</span>
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">Alice Smith</p>
-                    <p className="text-zinc-500 text-sm">CEO, StartupX</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
-                <p className="text-white/80 mb-4">
-                  "Our productivity has increased by 40% since implementing
-                  Chimly. The results speak for themselves."
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="text-emerald-500 font-semibold">RJ</span>
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">Robert Johnson</p>
-                    <p className="text-zinc-500 text-sm">Team Lead, Agency Y</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Duplicate Set for Seamless Loop */}
-            <div className="flex gap-6 px-6">
-              {/* Same testimonials repeated */}
-              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
-                <p className="text-white/80 mb-4">
-                  "Chimly has transformed how our team collaborates. The AI
-                  features are incredibly intuitive."
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="text-emerald-500 font-semibold">JD</span>
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">John Doe</p>
-                    <p className="text-zinc-500 text-sm">
-                      Product Manager, Tech Co
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
-                <p className="text-white/80 mb-4">
-                  "The automation features have saved us countless hours. It's
-                  like having an extra team member."
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="text-emerald-500 font-semibold">AS</span>
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">Alice Smith</p>
-                    <p className="text-zinc-500 text-sm">CEO, StartupX</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-[400px] flex-shrink-0">
-                <p className="text-white/80 mb-4">
-                  "Our productivity has increased by 40% since implementing
-                  Chimly. The results speak for themselves."
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="text-emerald-500 font-semibold">RJ</span>
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">Robert Johnson</p>
-                    <p className="text-zinc-500 text-sm">Team Lead, Agency Y</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* FAQs Section */}
       <section className="py-24 px-4">
         <div className="max-w-6xl mx-auto">

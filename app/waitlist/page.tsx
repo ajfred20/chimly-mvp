@@ -1,8 +1,44 @@
+"use client";
+
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Twitter } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 export default function WaitlistPage() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
+
+    try {
+      const form = formRef.current;
+      if (!form) return;
+
+      // Replace these with your actual EmailJS credentials
+      await emailjs.sendForm(
+        "service_fpeyuli",
+        "template_jat3ees",
+        form,
+        "IM1qBRmOP9zZWizWv"
+      );
+
+      setIsSuccess(true);
+      form.reset();
+    } catch (err) {
+      setError("Something went wrong. Please try again later.");
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {/* Background Avatars */}
@@ -71,15 +107,23 @@ export default function WaitlistPage() {
         </h1>
 
         {/* Form */}
-        <form className="space-y-4 mt-8 sm:mt-12 max-w-md mx-auto">
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className="space-y-4 mt-8 sm:mt-12 max-w-md mx-auto"
+        >
           <input
             type="text"
+            name="user_name"
             placeholder="Enter your name"
+            required
             className="w-full px-4 py-2 sm:py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm sm:text-base"
           />
           <input
             type="email"
+            name="user_email"
             placeholder="Enter your email"
+            required
             className="w-full px-4 py-2 sm:py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm sm:text-base"
           />
 
@@ -87,6 +131,7 @@ export default function WaitlistPage() {
             <input
               type="checkbox"
               id="consent"
+              name="consent"
               className="rounded border-zinc-700 mt-1"
             />
             <label htmlFor="consent">
@@ -97,10 +142,25 @@ export default function WaitlistPage() {
 
           <button
             type="submit"
-            className="w-full bg-emerald-600 text-white py-2 sm:py-3 rounded-lg font-medium hover:bg-emerald-700 transition-colors text-sm sm:text-base"
+            disabled={isSubmitting}
+            className="w-full bg-emerald-600 text-white py-2 sm:py-3 rounded-lg font-medium hover:bg-emerald-700 transition-colors text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Join Waitlist
+            {isSubmitting ? "Joining..." : "Join Waitlist"}
           </button>
+
+          {/* Success Message */}
+          {isSuccess && (
+            <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-lg text-sm">
+              Thanks for joining! We'll be in touch soon.
+            </div>
+          )}
+
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-2 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
         </form>
 
         {/* Social Link */}
