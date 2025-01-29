@@ -27,7 +27,7 @@ To get started, clone the repository using the following command:
 
 ```bash
 git clone https://github.com/ajfred20/chimly.git
-cd cre8tee
+cd chimly
 ```
 
 ### Install Dependencies
