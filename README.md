@@ -40,4 +40,4 @@ npm install
 
 If you enjoy this project, please consider giving it a star on GitHub!
 
-Also, feel free to follow me on X at [Aj Fred](https://x.com/iamajfred_).
+Also, feel free to follow me on X(Twitter) at [Aj Fred](https://x.com/iamajfred_).
