@@ -5,35 +5,39 @@ import Image from "next/image";
 import Link from "next/link";
 import { Twitter } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { toast } from "sonner";
 
 export default function WaitlistPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError("");
 
     try {
       const form = formRef.current;
       if (!form) return;
 
-      // Replace these with your actual EmailJS credentials
-      await emailjs.sendForm(
+      const templateParams = {
+        user_name: form.user_name.value,
+        user_email: form.user_email.value,
+        consent: form.consent.checked ? "Yes" : "No",
+        signup_time: new Date().toLocaleString(),
+      };
+
+      await emailjs.send(
         "service_fpeyuli",
-        "template_jat3ees",
-        form,
+        "template_21p6fmi",
+        templateParams,
         "IM1qBRmOP9zZWizWv"
       );
 
-      setIsSuccess(true);
+      toast.success("Thanks for joining! We'll be in touch soon.");
       form.reset();
-    } catch (err) {
-      setError("Something went wrong. Please try again later.");
-      console.error(err);
+    } catch (error) {
+      toast.error("Something went wrong. Please try again later.");
+      console.error("EmailJS Error:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -147,20 +151,6 @@ export default function WaitlistPage() {
           >
             {isSubmitting ? "Joining..." : "Join Waitlist"}
           </button>
-
-          {/* Success Message */}
-          {isSuccess && (
-            <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-lg text-sm">
-              Thanks for joining! We'll be in touch soon.
-            </div>
-          )}
-
-          {/* Error Message */}
-          {error && (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-2 rounded-lg text-sm">
-              {error}
-            </div>
-          )}
         </form>
 
         {/* Social Link */}

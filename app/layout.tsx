@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Chimly AI | Your AI-Powered Task Assistant",
@@ -47,7 +48,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              background: "#18181b",
+              border: "1px solid #27272a",
+              color: "#fff",
+            },
+          }}
+        />
+      </body>
     </html>
   );
 }
