@@ -1,11 +1,18 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Twitter, ArrowLeft } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // List of allowed email domains
 const ALLOWED_DOMAINS = [
@@ -18,9 +25,26 @@ const ALLOWED_DOMAINS = [
   "protonmail.com",
 ];
 
+// Add this near the top with other constants
+const PLAN_OPTIONS = [
+  { value: "Individual", label: "Individual Plan" },
+  { value: "Team", label: "Team Plan" },
+  { value: "Enterprise", label: "Enterprise Plan" },
+] as const;
+
 export default function WaitlistPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string>("");
+
+  // Initialize EmailJS
+  useEffect(() => {
+    try {
+      emailjs.init("IM1qBRmOP9zZWizWv");
+    } catch (error) {
+      console.error("EmailJS initialization error:", error);
+    }
+  }, []);
 
   const validateEmail = (email: string) => {
     const domain = email.split("@")[1]?.toLowerCase();
@@ -33,6 +57,12 @@ export default function WaitlistPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!selectedPlan) {
+      toast.error("Please select a plan");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -46,24 +76,32 @@ export default function WaitlistPage() {
       }
 
       const templateParams = {
+        from_name: form.user_name.value, // Make sure these match your EmailJS template variables
+        to_name: "Admin",
         user_name: form.user_name.value,
         user_email: email,
+        selected_plan: selectedPlan,
         consent: form.consent.checked ? "Yes" : "No",
         signup_time: new Date().toLocaleString(),
       };
 
-      await emailjs.send(
+      const response = await emailjs.send(
         "service_fpeyuli",
         "template_21p6fmi",
         templateParams,
         "IM1qBRmOP9zZWizWv"
       );
 
-      toast.success("Thanks for joining! We'll be in touch soon.");
-      form.reset();
-    } catch (error) {
+      if (response.status === 200) {
+        toast.success("Thanks for joining! We'll be in touch soon.");
+        form.reset();
+        setSelectedPlan("");
+      } else {
+        throw new Error("Failed to send email");
+      }
+    } catch (error: any) {
       toast.error("Something went wrong. Please try again later.");
-      console.error("EmailJS Error:", error);
+      console.error("EmailJS Error:", error?.text || error?.message || error);
     } finally {
       setIsSubmitting(false);
     }
@@ -167,6 +205,24 @@ export default function WaitlistPage() {
             required
             className="w-full px-4 py-2 sm:py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm sm:text-base"
           />
+
+          {/* Plan Selection using Shadcn Select */}
+          <Select value={selectedPlan} onValueChange={setSelectedPlan}>
+            <SelectTrigger className="w-full px-4 py-2 sm:py-3 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm sm:text-base">
+              <SelectValue placeholder="Select your plan" />
+            </SelectTrigger>
+            <SelectContent className="bg-zinc-900 border border-zinc-800 text-white">
+              {PLAN_OPTIONS.map((plan) => (
+                <SelectItem
+                  key={plan.value}
+                  value={plan.value}
+                  className="hover:bg-zinc-800 focus:bg-zinc-800 focus:text-white"
+                >
+                  {plan.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
           <div className="flex items-start gap-2 text-xs sm:text-sm text-zinc-400">
             <input

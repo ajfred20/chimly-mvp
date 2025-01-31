@@ -3,7 +3,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Chimly AI | Your AI-Powered Task Assistant",
+  title: "Chimly AI | Operational Intelligence for Teams",
   description:
     "Handle your daily tasks like a pro with our loaded AI features. Chimly helps you organize, automate, and optimize your workflow.",
   keywords: ["AI", "Task Management", "Productivity", "Automation", "Workflow"],
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://chimly.vercel.app",
     siteName: "Chimly AI",
-    title: "Chimly AI | Your AI-Powered Task Assistant",
+    title: "Chimly AI | Operational Intelligence for Teams",
     description: "Simplify your life, one task at a time",
     images: [
       {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chimly AI | Your AI-Powered Task Assistant",
+    title: "Chimly AI | Operational Intelligence for Teams",
     description: "Simplify your life, one task at a time",
     images: ["/assets/chimly.png"],
     creator: "@iamajfred_",
