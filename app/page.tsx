@@ -58,7 +58,8 @@ export default function Home() {
         {/* Hero Content */}
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-4xl md:text-7xl font-bold text-white mb-6 tracking-tight z-10">
-            Increase your Team&apos;s <br />
+            Increase your Team&apos;s
+            <br />
             Productivity,{" "}
             <span className="relative inline-block">
               <span className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-300 blur-2xl opacity-40 animate-gradient-x"></span>

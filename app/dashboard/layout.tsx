@@ -1,3 +1,5 @@
+"use client";
+
 import { Bell } from "lucide-react";
 
 export default function DashboardLayout({
@@ -9,7 +11,10 @@ export default function DashboardLayout({
     <div className="flex h-screen bg-[#1E1F1E] text-white">
       <main className="flex flex-col flex-1 relative">
         <header className="flex items-center justify-between p-4 border-b border-[#2A2B2A]">
-          <button className="p-2 text-gray-400 hover:text-white transition-colors">
+          <button
+            onClick={() => window.history.back()}
+            className="p-2 text-gray-400 hover:text-white transition-colors"
+          >
             <svg
               viewBox="0 0 24 24"
               className="w-4 h-4"

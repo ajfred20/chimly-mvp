@@ -1,78 +1,219 @@
-import { Sidebar } from "@/components/ui/sidebar";
-import { Bell, Mic } from "lucide-react";
+"use client";
 
-export default function Dashboard() {
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Home,
+  LayoutDashboard,
+  CheckSquare,
+  Calendar,
+  Settings,
+  Users,
+  Bell,
+  BarChart,
+  LogOut,
+  HelpCircle,
+} from "lucide-react";
+
+export default function DashboardPage() {
   return (
-    <div className="flex h-screen bg-[#1E1F1E] text-white font-satoshi">
-      <Sidebar />
-      <main className="flex flex-col flex-1 relative">
-        <header className="flex items-center justify-between p-4 border-b border-[#2A2B2A]">
-          <button className="p-2 text-gray-400 hover:text-white transition-colors">
-            <svg
-              viewBox="0 0 24 24"
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
+    <div className="flex h-screen bg-black">
+      {/* Sidebar */}
+      <aside className="w-64 border-r border-zinc-800 p-4">
+        {/* Logo */}
+        <div className="mb-8 px-2">
+          <Image
+            src="/assets/logo.png"
+            alt="Chimly"
+            width={120}
+            height={40}
+            className="brightness-0 invert"
+          />
+        </div>
+
+        {/* Navigation */}
+        <nav className="space-y-1">
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-white bg-zinc-800 rounded-lg"
+          >
+            <Home className="w-4 h-4" />
+            Home
+          </Link>
+
+          <Link
+            href="/dashboard/tasks"
+            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+          >
+            <CheckSquare className="w-4 h-4" />
+            Tasks
+          </Link>
+
+          <Link
+            href="/dashboard/calendar"
+            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+          >
+            <Calendar className="w-4 h-4" />
+            Calendar
+          </Link>
+
+          <Link
+            href="/dashboard/analytics"
+            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+          >
+            <BarChart className="w-4 h-4" />
+            Analytics
+          </Link>
+
+          <Link
+            href="/dashboard/team"
+            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+          >
+            <Users className="w-4 h-4" />
+            Team
+          </Link>
+        </nav>
+
+        {/* Secondary Navigation */}
+        <div className="mt-8">
+          <h3 className="px-3 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+            Settings
+          </h3>
+          <nav className="mt-2 space-y-1">
+            <Link
+              href="/dashboard/settings"
+              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
             >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-lg font-medium">My Day</h1>
-          <button className="p-2 text-gray-400 hover:text-white transition-colors">
-            <Bell className="w-4 h-4" />
-          </button>
-        </header>
-        <div className="flex-1 p-4">
-          {/* Add your dashboard content here */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="bg-[#2A2B2A] p-4 rounded-lg">
-              <h2 className="text-lg font-medium mb-2">Today's Tasks</h2>
-              <ul className="space-y-2">
-                <li className="text-sm text-gray-300">
-                  Complete project proposal
-                </li>
-                <li className="text-sm text-gray-300">Review team updates</li>
-                <li className="text-sm text-gray-300">
-                  Prepare for client meeting
-                </li>
-              </ul>
+              <Settings className="w-4 h-4" />
+              Settings
+            </Link>
+
+            <Link
+              href="/dashboard/notifications"
+              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            >
+              <Bell className="w-4 h-4" />
+              Notifications
+            </Link>
+
+            <Link
+              href="/help"
+              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            >
+              <HelpCircle className="w-4 h-4" />
+              Help & Support
+            </Link>
+          </nav>
+        </div>
+
+        {/* User Section */}
+        <div className="mt-auto pt-4 border-t border-zinc-800">
+          <div className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer">
+            <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
+              <span className="text-sm font-medium text-emerald-500">JD</span>
             </div>
-            <div className="bg-[#2A2B2A] p-4 rounded-lg">
-              <h2 className="text-lg font-medium mb-2">Upcoming Deadlines</h2>
-              <ul className="space-y-2">
-                <li className="text-sm text-gray-300">
-                  Project X - Due in 3 days
-                </li>
-                <li className="text-sm text-gray-300">
-                  Quarterly Report - Due in 1 week
-                </li>
-              </ul>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white truncate">
+                John Doe
+              </p>
+              <p className="text-xs text-zinc-500 truncate">john@example.com</p>
             </div>
-            <div className="bg-[#2A2B2A] p-4 rounded-lg">
-              <h2 className="text-lg font-medium mb-2">Recent Activity</h2>
-              <ul className="space-y-2">
-                <li className="text-sm text-gray-300">
-                  Task "Update documentation" completed
-                </li>
-                <li className="text-sm text-gray-300">
-                  New task assigned: "Prepare presentation"
-                </li>
-              </ul>
-            </div>
+            <LogOut className="w-4 h-4 text-zinc-400" />
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-[#1E1F1E]">
-          <div className="flex items-center gap-2 px-4 py-3 bg-[#2A2B2A] rounded-full">
-            <div className="w-0.5 h-5 bg-emerald-500" />
-            <input
-              type="text"
-              placeholder="What do you want to do today?"
-              className="flex-1 bg-transparent outline-none text-gray-300 placeholder-gray-500 text-sm"
-            />
-            <button className="text-gray-400 hover:text-white transition-colors">
-              <Mic className="w-4 h-4 text-emerald-300" />
-            </button>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto">
+        <div className="p-8">
+          <div className="max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-8">
+              <h1 className="text-2xl font-bold text-white">Dashboard</h1>
+              <button className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+                New Task
+              </button>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {/* Stat Card */}
+              <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-emerald-500/10 rounded-lg">
+                    <CheckSquare className="w-6 h-6 text-emerald-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-zinc-400">Total Tasks</p>
+                    <p className="text-2xl font-bold text-white">248</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Stat Card */}
+              <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-blue-500/10 rounded-lg">
+                    <Users className="w-6 h-6 text-blue-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-zinc-400">Team Members</p>
+                    <p className="text-2xl font-bold text-white">12</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Stat Card */}
+              <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-purple-500/10 rounded-lg">
+                    <BarChart className="w-6 h-6 text-purple-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-zinc-400">Completion Rate</p>
+                    <p className="text-2xl font-bold text-white">87%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Recent Activity */}
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <h2 className="text-lg font-semibold text-white mb-4">
+                Recent Activity
+              </h2>
+              <div className="space-y-4">
+                {/* Activity Item */}
+                <div className="flex items-center gap-4">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <p className="text-sm text-zinc-400">
+                    <span className="text-white">Sarah</span> completed task{" "}
+                    <span className="text-white">Homepage Redesign</span>
+                  </p>
+                  <span className="ml-auto text-xs text-zinc-500">2h ago</span>
+                </div>
+
+                {/* Activity Item */}
+                <div className="flex items-center gap-4">
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
+                  <p className="text-sm text-zinc-400">
+                    <span className="text-white">Mike</span> added new task{" "}
+                    <span className="text-white">API Integration</span>
+                  </p>
+                  <span className="ml-auto text-xs text-zinc-500">4h ago</span>
+                </div>
+
+                {/* Activity Item */}
+                <div className="flex items-center gap-4">
+                  <div className="w-2 h-2 rounded-full bg-purple-500" />
+                  <p className="text-sm text-zinc-400">
+                    <span className="text-white">Anna</span> updated project{" "}
+                    <span className="text-white">Mobile App</span>
+                  </p>
+                  <span className="ml-auto text-xs text-zinc-500">6h ago</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
