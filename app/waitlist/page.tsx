@@ -3,13 +3,33 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Twitter } from "lucide-react";
+import { Twitter, ArrowLeft } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
+
+// List of allowed email domains
+const ALLOWED_DOMAINS = [
+  "gmail.com",
+  "yahoo.com",
+  "hotmail.com",
+  "outlook.com",
+  "icloud.com",
+  "aol.com",
+  "protonmail.com",
+];
 
 export default function WaitlistPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateEmail = (email: string) => {
+    const domain = email.split("@")[1]?.toLowerCase();
+    if (!domain || !ALLOWED_DOMAINS.includes(domain)) {
+      toast.error("Please use a personal email address");
+      return false;
+    }
+    return true;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,9 +39,15 @@ export default function WaitlistPage() {
       const form = formRef.current;
       if (!form) return;
 
+      const email = form.user_email.value;
+      if (!validateEmail(email)) {
+        setIsSubmitting(false);
+        return;
+      }
+
       const templateParams = {
         user_name: form.user_name.value,
-        user_email: form.user_email.value,
+        user_email: email,
         consent: form.consent.checked ? "Yes" : "No",
         signup_time: new Date().toLocaleString(),
       };
@@ -45,9 +71,20 @@ export default function WaitlistPage() {
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4 relative overflow-hidden">
+      {/* Back Button */}
+      <div className="absolute top-6 left-6 z-50">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Back to Home</span>
+        </Link>
+      </div>
+
       {/* Background Avatars */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-4 sm:top-10 sm:left-10 animate-float-slow">
+        <div className="absolute top-24 left-4 sm:top-14 sm:left-10 animate-float-slow">
           <Image
             src="/assets/sarah.svg"
             alt=""
