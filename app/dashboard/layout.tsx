@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell } from "lucide-react";
+import { Bell, Bot } from "lucide-react";
 
 export default function DashboardLayout({
   children,

@@ -13,6 +13,7 @@ import {
   BarChart,
   LogOut,
   HelpCircle,
+  Bot,
 } from "lucide-react";
 
 export default function DashboardPage() {
@@ -40,7 +41,13 @@ export default function DashboardPage() {
             <Home className="w-4 h-4" />
             Home
           </Link>
-
+          <Link
+            href="/dashboard/ai"
+            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+          >
+            <Bot className="w-4 h-4" />
+            AI
+          </Link>
           <Link
             href="/dashboard/tasks"
             className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
