@@ -13,6 +13,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ReactConfetti from "react-confetti";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 // List of allowed email domains
 const ALLOWED_DOMAINS = [
@@ -36,6 +43,12 @@ export default function WaitlistPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string>("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [windowSize, setWindowSize] = useState({
+    width: 0,
+    height: 0,
+  });
 
   // Initialize EmailJS
   useEffect(() => {
@@ -44,6 +57,22 @@ export default function WaitlistPage() {
     } catch (error) {
       console.error("EmailJS initialization error:", error);
     }
+  }, []);
+
+  // Add window size effect
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    // Set initial size
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const validateEmail = (email: string) => {
@@ -96,6 +125,11 @@ export default function WaitlistPage() {
         toast.success("Thanks for joining! We'll be in touch soon.");
         form.reset();
         setSelectedPlan("");
+        // Show success modal and confetti
+        setShowSuccessModal(true);
+        setShowConfetti(true);
+        // Hide confetti after 5 seconds
+        setTimeout(() => setShowConfetti(false), 5000);
       } else {
         throw new Error("Failed to send email");
       }
@@ -106,6 +140,15 @@ export default function WaitlistPage() {
       setIsSubmitting(false);
     }
   };
+
+  // Add this before the return statement
+  useEffect(() => {
+    if (showSuccessModal) {
+      // Hide modal after 6 seconds
+      const timer = setTimeout(() => setShowSuccessModal(false), 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessModal]);
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4 relative overflow-hidden">
@@ -260,6 +303,38 @@ export default function WaitlistPage() {
           </Link>
         </div>
       </div>
+
+      {/* Add Success Modal */}
+      <Dialog open={showSuccessModal} onOpenChange={setShowSuccessModal}>
+        <DialogContent className="bg-zinc-900 border-zinc-800 text-white p-6 sm:p-8 max-w-md mx-auto">
+          <DialogHeader>
+            <DialogTitle className="sr-only">Registration Success</DialogTitle>
+            <div className="text-center space-y-4">
+              <div className="text-6xl animate-bounce">❤️</div>
+              <h2 className="text-2xl font-bold">Thank You for Joining!</h2>
+              <p className="text-zinc-400">
+                Get ready! We're preparing something amazing and you'll be among
+                the first to know when we launch.
+              </p>
+              <p className="text-emerald-500 font-medium">
+                Stay tuned for updates! 🚀
+              </p>
+            </div>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Confetti */}
+      {showConfetti && (
+        <ReactConfetti
+          width={windowSize.width}
+          height={windowSize.height}
+          recycle={false}
+          numberOfPieces={200}
+          gravity={0.2}
+          colors={["#059669", "#34d399", "#6ee7b7", "#ffffff"]}
+        />
+      )}
     </div>
   );
 }
