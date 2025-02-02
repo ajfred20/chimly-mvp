@@ -1,8 +1,44 @@
+"use client";
+
 import { GithubIcon, SlackIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function SignUpPage() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
+
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        "https://chimlybackendmain.onrender.com/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Handle successful signup
+        console.log("Signup successful");
+      } else {
+        // Handle signup error
+        console.error("Signup failed");
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
+  };
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
       {/* Logo */}
@@ -22,7 +58,7 @@ export default function SignUpPage() {
           Create your account
         </h1>
 
-        <form className="space-y-6">
+        <form onSubmit={handleSignUp} className="space-y-6">
           <div className="space-y-2">
             <label htmlFor="name" className="block text-sm text-zinc-400">
               Full Name
@@ -30,6 +66,8 @@ export default function SignUpPage() {
             <input
               id="name"
               type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Enter your full name"
               className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
             />
@@ -42,6 +80,8 @@ export default function SignUpPage() {
             <input
               id="email"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
               className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
             />
@@ -54,6 +94,8 @@ export default function SignUpPage() {
             <input
               id="password"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Create a password"
               className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
             />
