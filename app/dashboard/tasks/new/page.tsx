@@ -52,6 +52,35 @@ export default function NewTaskPage() {
     setIsRecording(false);
   };
 
+  const createTask = async (taskData: any) => {
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      const response = await fetch("https://chimlybackend.onrender.com/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: taskData.title,
+          start_time: taskData.startTime,
+          duration_hours: taskData.durationHours,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create task");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error creating task:", error);
+      throw error;
+    }
+  };
+
   return (
     <div className="p-4 sm:p-8">
       <div className="max-w-3xl mx-auto">
