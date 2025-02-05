@@ -3,18 +3,21 @@
 import { GithubIcon, SlackIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { FormEventHandler, useState } from "react";
+import { useState } from "react";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [name, setName] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       const response = await fetch(
-        "https://chimlybackendmain.onrender.com/login",
+        "https://chimlybackendmain.onrender.com/signup", // Change to correct endpoint
         {
           method: "POST",
           headers: {
@@ -29,16 +32,18 @@ export default function SignUpPage() {
       );
 
       if (response.ok) {
-        // Handle successful signup
         console.log("Signup successful");
+        // Redirect or show success message
       } else {
-        // Handle signup error
         console.error("Signup failed");
       }
     } catch (error) {
       console.error("Error during signup:", error);
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
       {/* Logo */}
@@ -70,6 +75,7 @@ export default function SignUpPage() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your full name"
               className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+              required
             />
           </div>
 
@@ -84,6 +90,7 @@ export default function SignUpPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
               className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+              required
             />
           </div>
 
@@ -98,14 +105,16 @@ export default function SignUpPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Create a password"
               className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+              required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-white text-black py-2 rounded-lg font-medium hover:bg-white/90 transition-colors"
+            className="w-full bg-white text-black py-2 rounded-lg font-medium hover:bg-white/90 transition-colors disabled:opacity-50"
+            disabled={loading}
           >
-            Create Account
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
 
           <div className="relative">
