@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function SignUpPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [name, setName] = useState<string>("");
+  const [username, setName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,14 +17,14 @@ export default function SignUpPage() {
 
     try {
       const response = await fetch(
-        "https://chimlybackendmain.onrender.com/signup", // Change to correct endpoint
+        "https://chimlybackendmain.onrender.com/api/auth/signup", // Change to correct endpoint
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name,
+            username,
             email,
             password,
           }),
@@ -71,7 +71,7 @@ export default function SignUpPage() {
             <input
               id="name"
               type="text"
-              value={name}
+              value={username}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your full name"
               className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
