@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chimly - Your AI Task Manager 🤖
 
-## Getting Started
+![Chimly Preview](https://raw.githubusercontent.com/ajfred20/chimly/main/public/assets/preview.png)
 
-First, run the development server:
+> 🌟 A modern AI Task manager website built with Next.js 15, Tailwind CSS, and Framer Motion
+
+## 🔴 Live Preview
+
+Check out the live site at [Chimly](https://chimly.vercel.app)
+
+## ✨ Features
+
+- ⚡️ Next.js 15 with App Router
+- 🎨 Tailwind CSS for styling
+- 🎬 Framer Motion animations
+- 📱 Fully responsive design
+- 🌙 Modern UI components
+- 🚀 Fast performance
+
+## 🚀 Getting Started
+
+After cloning the repository, navigate to the `app` folder and edit the `page.tsx` file to customize the main page. Additionally, you can modify the components found in the `components` folder to change the UI elements as needed.
+
+### Clone the Repository
+
+To get started, clone the repository using the following command:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/ajfred20/chimly.git
+cd chimly
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
+#Backend API
+This is the link to the [Postman](https://martian-station-77788.postman.co/workspace/Chimly~be904c0e-41aa-42f1-800e-076fe58425c2/collection/32171163-45bd9878-8621-4338-85a0-7620cbe37a5d?action=share&creator=32171163)
+## ⭐️ Support Us
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+If you enjoy this project, please consider giving it a star on GitHub!
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Also, feel free to follow me on X(Twitter) at [Aj Fred](https://x.com/iamajfred_).
