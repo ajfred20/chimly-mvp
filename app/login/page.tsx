@@ -10,9 +10,11 @@ export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await fetch("https://chimlybackendmain.onrender.com/api/auth/login", {
         method: "POST",
@@ -31,6 +33,8 @@ export default function LoginPage() {
       }
     } catch (error) {
       console.error("Error during login:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,7 +64,6 @@ export default function LoginPage() {
             <label htmlFor="password" className="block text-sm text-zinc-400">Password</label>
             <input
               id="password"
-              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Your password"
@@ -69,7 +72,7 @@ export default function LoginPage() {
           </div>
 
           <button type="submit" className="w-full bg-white text-black py-2 rounded-lg font-medium hover:bg-white/90">
-            Continue
+            {loading ? "Loading..." : "Continue"}
           </button>
         </form>
 

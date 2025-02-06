@@ -4,12 +4,14 @@ import { GithubIcon, SlackIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [username, setName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,6 +35,7 @@ export default function SignUpPage() {
 
       if (response.ok) {
         console.log("Signup successful");
+        router.push('/login')
         // Redirect or show success message
       } else {
         console.error("Signup failed");
@@ -100,7 +103,6 @@ export default function SignUpPage() {
             </label>
             <input
               id="password"
-              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Create a password"
