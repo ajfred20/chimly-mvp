@@ -36,7 +36,6 @@ export default function SignUpPage() {
       if (response.ok) {
         console.log("Signup successful");
         router.push('/login')
-        // Redirect or show success message
       } else {
         console.error("Signup failed");
       }
