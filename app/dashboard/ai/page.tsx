@@ -1,15 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import {
-  Mic,
-  MicOff,
-  Send,
-  Bot,
-  Loader2,
-  PlayCircle,
-  PauseCircle,
-} from "lucide-react";
+import { Mic, MicOff, Send, Bot, Loader2, PlayCircle, PauseCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -38,9 +30,7 @@ export default function AIPage() {
   const [isLoading, setIsLoading] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement | null>(
-    null
-  );
+  const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const recordingStartTime = useRef<Date | null>(null);
 
@@ -71,17 +61,48 @@ export default function AIPage() {
     setInput("");
     setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      console.log("Token found:", storedToken);
+    } else {
+      console.log("Token not found.");
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/schedule", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${storedToken}`,
+        },
+        body: JSON.stringify({ input, userId: storedToken }),
+      });
+
+      const data = await response.json(); // Await the response.json()
+      console.log("AI response:", data);
+
+      if (!response.ok) {
+        const storedToken = localStorage.getItem('token');
+console.log("Stored token:", storedToken);
+      }
+
       const aiResponse: Message = {
         role: "assistant",
-        content:
-          "This is a simulated AI response. Replace with actual AI integration.",
+        content: data.message, 
+        timestamp: new Date(),
+      };
+
+      setMessages((prev) => [...prev, aiResponse]);
+    } catch (error: any) {
+      const aiResponse: Message = {
+        role: "assistant",
+        content: `Error: ${error.message}`,
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiResponse]);
-      setIsLoading(false);
-    }, 1000);
+    }
+
+    setIsLoading(false);
   };
 
   const startRecording = async () => {
@@ -152,8 +173,7 @@ export default function AIPage() {
   };
 
   const generateWaveform = async (audioBlob: Blob): Promise<number[]> => {
-    const audioContext = new (window.AudioContext ||
-      (window as any).webkitAudioContext)();
+    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     const arrayBuffer = await audioBlob.arrayBuffer();
     const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
     const rawData = audioBuffer.getChannelData(0);
@@ -267,69 +287,33 @@ export default function AIPage() {
           ))}
           {isLoading && (
             <div className="flex flex-col items-start max-w-[85%]">
-              <span className="text-xs text-zinc-500 mb-1 px-1">
-                AI Assistant
-              </span>
-              <div className="flex items-start gap-3">
-                <Avatar className="w-8 h-8">
-                  <AvatarFallback className="bg-emerald-500/10">
-                    <Bot className="w-4 h-4 text-emerald-500" />
-                  </AvatarFallback>
-                </Avatar>
-                <div className="px-4 py-3 bg-zinc-800/50 rounded-lg">
-                  <div className="flex gap-1">
-                    <div className="w-1.5 h-1.5 bg-emerald-500/50 rounded-full animate-pulse" />
-                    <div className="w-1.5 h-1.5 bg-emerald-500/50 rounded-full animate-pulse delay-150" />
-                    <div className="w-1.5 h-1.5 bg-emerald-500/50 rounded-full animate-pulse delay-300" />
-                  </div>
-                </div>
+              <span className="text-xs text-zinc-500 mb-1 px-1">AI Assistant</span>
+              <div className="px-4 py-3 bg-zinc-800/50 rounded-lg text-white">
+                <Loader2 className="animate-spin text-white w-6 h-6" />
               </div>
             </div>
           )}
+          <div ref={messagesEndRef} />
         </div>
       </div>
 
-      {/* Chat Input */}
-      <div className="p-4 bg-zinc-900/50 backdrop-blur-sm border-t border-zinc-800">
-        <div className="relative max-w-3xl mx-auto">
+      {/* Input Area */}
+      <div className="p-4 sm:p-6 border-t border-zinc-800 bg-zinc-900/50 backdrop-blur-sm">
+        <div className="max-w-3xl mx-auto flex gap-3">
           <Textarea
+            rows={1}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Type a message..."
-            className="min-h-[52px] max-h-32 bg-zinc-800/50 border-zinc-700/50 rounded-lg resize-none pr-24 py-3 text-sm"
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleSend();
-              }
-            }}
+            placeholder="Enter your task here..."
+            className="resize-none flex-1"
           />
-          <div className="absolute bottom-2 right-2 flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn(
-                "h-8 w-8 rounded-lg",
-                isRecording
-                  ? "text-red-500 animate-pulse bg-red-500/10"
-                  : "text-zinc-400 hover:text-emerald-500 hover:bg-emerald-500/10"
-              )}
-              onClick={isRecording ? stopRecording : startRecording}
-            >
-              {isRecording ? (
-                <MicOff className="w-4 h-4" />
-              ) : (
-                <Mic className="w-4 h-4" />
-              )}
-            </Button>
-            <Button
-              size="icon"
-              className="h-8 w-8 rounded-lg bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500/20"
-              onClick={handleSend}
-            >
-              <Send className="w-4 h-4" />
-            </Button>
-          </div>
+          <Button
+            variant="primary"
+            onClick={handleSend}
+            disabled={isLoading}
+          >
+            <Send className="w-5 h-5" />
+          </Button>
         </div>
       </div>
     </div>
