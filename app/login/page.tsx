@@ -28,6 +28,7 @@ export default function LoginPage() {
       if (response.ok) {
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
+        localStorage.setItem("userId", data.token);
         router.push("/dashboard");
       } else {
         console.error("Login failed:", data.message);
