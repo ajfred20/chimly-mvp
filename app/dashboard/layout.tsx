@@ -14,6 +14,7 @@ import {
   HelpCircle,
   Bot,
   Menu,
+  ArrowLeft,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -45,6 +46,19 @@ export default function DashboardLayout({
             isCollapsed ? "lg:w-20" : "w-64"
           }`}
         >
+          {/* Back to Home Link */}
+          <Link
+            href="/"
+            className={`mb-6 flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+              isCollapsed ? "lg:justify-center" : ""
+            }`}
+          >
+            <ArrowLeft
+              className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
+            />
+            <span className={isCollapsed ? "lg:hidden" : ""}>Back to Home</span>
+          </Link>
+
           {/* Logo */}
           <div className="mb-8 px-2 flex items-center justify-between">
             <Image
