@@ -14,13 +14,29 @@ import {
   LogOut,
   HelpCircle,
   Bot,
+  Menu,
 } from "lucide-react";
+import { useState } from "react";
 
 export default function DashboardPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="flex h-screen bg-black">
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-zinc-800 rounded-lg"
+      >
+        <Menu className="w-6 h-6 text-white" />
+      </button>
+
       {/* Sidebar */}
-      <aside className="w-64 border-r border-zinc-800 p-4">
+      <aside
+        className={`${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0 fixed lg:relative w-64 h-full border-r border-zinc-800 p-4 bg-black transition-transform duration-200 ease-in-out z-40`}
+      >
         {/* Logo */}
         <div className="mb-8 px-2">
           <Image
@@ -131,21 +147,21 @@ export default function DashboardPage() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
-        <div className="p-8">
+      <main className="flex-1 overflow-y-auto w-full">
+        <div className="p-4 sm:p-8">
           <div className="max-w-7xl mx-auto">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
               <h1 className="text-2xl font-bold text-white">Dashboard</h1>
-              <button className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+              <button className="w-full sm:w-auto px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
                 New Task
               </button>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
               {/* Stat Card */}
-              <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
+              <div className="p-4 sm:p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-emerald-500/10 rounded-lg">
                     <CheckSquare className="w-6 h-6 text-emerald-500" />
@@ -158,7 +174,7 @@ export default function DashboardPage() {
               </div>
 
               {/* Stat Card */}
-              <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
+              <div className="p-4 sm:p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-blue-500/10 rounded-lg">
                     <Users className="w-6 h-6 text-blue-500" />
@@ -171,7 +187,7 @@ export default function DashboardPage() {
               </div>
 
               {/* Stat Card */}
-              <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
+              <div className="p-4 sm:p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-purple-500/10 rounded-lg">
                     <BarChart className="w-6 h-6 text-purple-500" />
@@ -185,39 +201,45 @@ export default function DashboardPage() {
             </div>
 
             {/* Recent Activity */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 sm:p-6">
               <h2 className="text-lg font-semibold text-white mb-4">
                 Recent Activity
               </h2>
               <div className="space-y-4">
                 {/* Activity Item */}
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   <div className="w-2 h-2 rounded-full bg-emerald-500" />
                   <p className="text-sm text-zinc-400">
                     <span className="text-white">Sarah</span> completed task{" "}
                     <span className="text-white">Homepage Redesign</span>
                   </p>
-                  <span className="ml-auto text-xs text-zinc-500">2h ago</span>
+                  <span className="text-xs text-zinc-500 sm:ml-auto">
+                    2h ago
+                  </span>
                 </div>
 
                 {/* Activity Item */}
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   <div className="w-2 h-2 rounded-full bg-blue-500" />
                   <p className="text-sm text-zinc-400">
                     <span className="text-white">Mike</span> added new task{" "}
                     <span className="text-white">API Integration</span>
                   </p>
-                  <span className="ml-auto text-xs text-zinc-500">4h ago</span>
+                  <span className="text-xs text-zinc-500 sm:ml-auto">
+                    4h ago
+                  </span>
                 </div>
 
                 {/* Activity Item */}
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   <div className="w-2 h-2 rounded-full bg-purple-500" />
                   <p className="text-sm text-zinc-400">
                     <span className="text-white">Anna</span> updated project{" "}
                     <span className="text-white">Mobile App</span>
                   </p>
-                  <span className="ml-auto text-xs text-zinc-500">6h ago</span>
+                  <span className="text-xs text-zinc-500 sm:ml-auto">
+                    6h ago
+                  </span>
                 </div>
               </div>
             </div>
