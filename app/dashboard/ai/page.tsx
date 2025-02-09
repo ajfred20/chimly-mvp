@@ -34,30 +34,41 @@ export default function AIPage() {
   };
 
   const handleSend = async () => {
-    if (!message.trim()) return;
+  if (!message.trim()) return;
+  const token = localStorage.getItem("token")
+  const userId = "67a917b13435a9476cb2dc87y"; 
 
-    const newMessage: Message = {
-      role: "user",
-      content: message,
+  const response = await fetch(
+    "https://chimlybackendmain.onrender.com/api/schedule",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ input: message, userId }),
+    }
+  );
+
+  const data = await response.json();
+
+  const newMessage: Message = {
+    role: "user",
+    content: message,
+    timestamp: new Date(),
+  };
+
+  setMessages((prev) => [...prev, newMessage]);
+  setMessage("");
+  setIsLoading(true);
+
+  if (data.response) {
+    const aiResponse: Message = {
+      role: "assistant",
+      content: data.response,
       timestamp: new Date(),
     };
-
-    setMessages((prev) => [...prev, newMessage]);
-    setMessage("");
-    setIsLoading(true);
-
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponse: Message = {
-        role: "assistant",
-        content:
-          "This is a simulated AI response. Replace with actual AI integration.",
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, aiResponse]);
-      setIsLoading(false);
-    }, 1000);
-  };
+    setMessages((prev) => [...prev, aiResponse]);
+  }
+  setIsLoading(false);
+};
 
   const startRecording = async () => {
     try {
