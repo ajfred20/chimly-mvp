@@ -20,6 +20,7 @@ import { useState } from "react";
 
 export default function DashboardPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <div className="flex h-screen bg-black">
@@ -35,102 +36,158 @@ export default function DashboardPage() {
       <aside
         className={`${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 fixed lg:relative w-64 h-full border-r border-zinc-800 p-4 bg-black transition-transform duration-200 ease-in-out z-40`}
+        } lg:translate-x-0 fixed lg:relative ${
+          isCollapsed ? "lg:w-20" : "w-64"
+        } h-full border-r border-zinc-800 p-4 bg-black transition-all duration-300 ease-in-out z-40`}
       >
         {/* Logo */}
-        <div className="mb-8 px-2">
+        <div className="mb-8 px-2 flex items-center justify-between">
           <Image
             src="/assets/logo.png"
             alt="Chimly"
             width={120}
             height={40}
-            className="brightness-0 invert"
+            className={`brightness-0 invert transition-all duration-300 ${
+              isCollapsed ? "hidden" : "block"
+            }`}
           />
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="hidden lg:block p-2 hover:bg-zinc-800 rounded-lg"
+          >
+            <Menu
+              className={`${
+                isCollapsed ? "lg:w-6 lg:h-6" : "w-4 h-4"
+              } text-white`}
+            />
+          </button>
         </div>
 
         {/* Navigation */}
         <nav className="space-y-1">
           <Link
             href="/dashboard"
-            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-white bg-zinc-800 rounded-lg"
+            className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-white bg-zinc-800 rounded-lg ${
+              isCollapsed ? "lg:justify-center" : ""
+            }`}
           >
-            <Home className="w-4 h-4" />
-            Home
+            <Home className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`} />
+            <span className={isCollapsed ? "lg:hidden" : ""}>Home</span>
           </Link>
           <Link
             href="/dashboard/ai"
-            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+              isCollapsed ? "lg:justify-center" : ""
+            }`}
           >
-            <Bot className="w-4 h-4" />
-            AI
+            <Bot className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`} />
+            <span className={isCollapsed ? "lg:hidden" : ""}>AI</span>
           </Link>
           <Link
             href="/dashboard/tasks"
-            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+              isCollapsed ? "lg:justify-center" : ""
+            }`}
           >
-            <CheckSquare className="w-4 h-4" />
-            Tasks
+            <CheckSquare
+              className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
+            />
+            <span className={isCollapsed ? "lg:hidden" : ""}>Tasks</span>
           </Link>
 
           <Link
             href="/dashboard/calendar"
-            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+              isCollapsed ? "lg:justify-center" : ""
+            }`}
           >
-            <Calendar className="w-4 h-4" />
-            Calendar
+            <Calendar
+              className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
+            />
+            <span className={isCollapsed ? "lg:hidden" : ""}>Calendar</span>
           </Link>
 
           <Link
             href="/dashboard/analytics"
-            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+              isCollapsed ? "lg:justify-center" : ""
+            }`}
           >
-            <BarChart className="w-4 h-4" />
-            Analytics
+            <BarChart
+              className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
+            />
+            <span className={isCollapsed ? "lg:hidden" : ""}>Analytics</span>
           </Link>
 
           <Link
             href="/dashboard/team"
-            className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+              isCollapsed ? "lg:justify-center" : ""
+            }`}
           >
-            <Users className="w-4 h-4" />
-            Team
+            <Users className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`} />
+            <span className={isCollapsed ? "lg:hidden" : ""}>Team</span>
           </Link>
         </nav>
 
         {/* Secondary Navigation */}
         <div className="mt-8">
-          <h3 className="px-3 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+          <h3
+            className={`px-3 text-xs font-semibold text-zinc-500 uppercase tracking-wider ${
+              isCollapsed ? "lg:hidden" : ""
+            }`}
+          >
             Settings
           </h3>
           <nav className="mt-2 space-y-1">
             <Link
               href="/dashboard/settings"
-              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+                isCollapsed ? "lg:justify-center" : ""
+              }`}
             >
-              <Settings className="w-4 h-4" />
-              Settings
+              <Settings
+                className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
+              />
+              <span className={isCollapsed ? "lg:hidden" : ""}>Settings</span>
             </Link>
 
             <Link
               href="/dashboard/notifications"
-              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+                isCollapsed ? "lg:justify-center" : ""
+              }`}
             >
-              <Bell className="w-4 h-4" />
-              Notifications
+              <Bell
+                className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
+              />
+              <span className={isCollapsed ? "lg:hidden" : ""}>
+                Notifications
+              </span>
             </Link>
 
             <Link
               href="/help"
-              className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+                isCollapsed ? "lg:justify-center" : ""
+              }`}
             >
-              <HelpCircle className="w-4 h-4" />
-              Help & Support
+              <HelpCircle
+                className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
+              />
+              <span className={isCollapsed ? "lg:hidden" : ""}>
+                Help & Support
+              </span>
             </Link>
           </nav>
         </div>
 
         {/* User Section */}
-        <div className="mt-auto pt-4 border-t border-zinc-800">
+        <div
+          className={`mt-auto pt-4 border-t border-zinc-800 ${
+            isCollapsed ? "lg:hidden" : ""
+          }`}
+        >
           <div className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer">
             <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
               <span className="text-sm font-medium text-emerald-500">JD</span>
