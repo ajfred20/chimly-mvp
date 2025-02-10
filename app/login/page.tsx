@@ -17,18 +17,21 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("https://chimlybackendmain.onrender.com/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://chimlybackendmain.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
-        localStorage.setItem("userId", data.token);
+        localStorage.setItem("userId", data.userId);
         router.push("/dashboard");
       } else {
         console.error("Login failed:", data.message);
@@ -43,15 +46,25 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
       <div className="mb-8">
-        <Image src="/assets/logo.png" alt="Chimly" width={140} height={140} className="brightness-0 invert" />
+        <Image
+          src="/assets/logo.png"
+          alt="Chimly"
+          width={140}
+          height={140}
+          className="brightness-0 invert"
+        />
       </div>
 
       <div className="w-full max-w-md p-8 rounded-2xl bg-zinc-900 border border-zinc-800">
-        <h1 className="text-2xl font-semibold text-white text-center mb-8">Sign in</h1>
+        <h1 className="text-2xl font-semibold text-white text-center mb-8">
+          Sign in
+        </h1>
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm text-zinc-400">Email</label>
+            <label htmlFor="email" className="block text-sm text-zinc-400">
+              Email
+            </label>
             <input
               id="email"
               type="email"
@@ -64,7 +77,9 @@ export default function LoginPage() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm text-zinc-400">Password</label>
+            <label htmlFor="password" className="block text-sm text-zinc-400">
+              Password
+            </label>
             <input
               id="password"
               type="password"
@@ -81,17 +96,15 @@ export default function LoginPage() {
             className="w-full bg-white text-black py-2 rounded-lg font-medium hover:bg-white/90 flex items-center justify-center"
             disabled={loading}
           >
-            {loading ? (
-                "Signing in..."
-            ) : (
-              "Continue"
-            )}
+            {loading ? "Signing in..." : "Continue"}
           </button>
         </form>
 
         <p className="mt-6 text-center text-sm text-zinc-500">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="text-white hover:text-emerald-500">Sign up</Link>
+          <Link href="/signup" className="text-white hover:text-emerald-500">
+            Sign up
+          </Link>
         </p>
       </div>
     </div>

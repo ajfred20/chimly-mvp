@@ -1,163 +1,82 @@
 "use client";
 
-import { Bot, Mic, MicOff, Send, PlayCircle, PauseCircle } from "lucide-react";
-import { useState, useRef } from "react";
+import { Bot, Send } from "lucide-react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
   timestamp: Date;
-  audio?: {
-    url: string;
-    duration: string;
-    waveform?: number[];
-  };
 }
 
 export default function AIPage() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
-  const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement | null>(
-    null
-  );
-  const [isPlaying, setIsPlaying] = useState(false);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const recordingStartTime = useRef<Date | null>(null);
-
-  const formatDuration = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = Math.floor(seconds % 60);
-    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
-  };
 
   const handleSend = async () => {
-  if (!message.trim()) return;
-  const token = localStorage.getItem("token")
-  const userId = "67a917b13435a9476cb2dc87y"; 
+    if (!message.trim()) return;
 
-  const response = await fetch(
-    "https://chimlybackendmain.onrender.com/api/schedule",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ input: message, userId }),
-    }
-  );
-
-  const data = await response.json();
-
-  const newMessage: Message = {
-    role: "user",
-    content: message,
-    timestamp: new Date(),
-  };
-
-  setMessages((prev) => [...prev, newMessage]);
-  setMessage("");
-  setIsLoading(true);
-
-  if (data.response) {
-    const aiResponse: Message = {
-      role: "assistant",
-      content: data.response,
+    const newMessage: Message = {
+      role: "user",
+      content: message,
       timestamp: new Date(),
     };
-    setMessages((prev) => [...prev, aiResponse]);
-  }
-  setIsLoading(false);
-};
 
-  const startRecording = async () => {
+    setMessages((prev) => [...prev, newMessage]);
+    setMessage("");
+    setIsLoading(true);
+
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
-      mediaRecorderRef.current = mediaRecorder;
-      recordingStartTime.current = new Date();
+      const token = localStorage.getItem("userId");
 
-      const chunks: BlobPart[] = [];
-      mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
-      mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(chunks, { type: "audio/webm" });
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const waveform = await generateWaveform(audioBlob);
-
-        const endTime = new Date();
-        const duration = recordingStartTime.current
-          ? (endTime.getTime() - recordingStartTime.current.getTime()) / 1000
-          : 0;
-
-        const newMessage: Message = {
-          role: "user",
-          content: "Voice message",
-          timestamp: new Date(),
-          audio: {
-            url: audioUrl,
-            duration: formatDuration(duration),
-            waveform,
+      const response = await fetch(
+        "https://chimlybackendmain.onrender.com/api/schedule",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-        };
-        setMessages((prev) => [...prev, newMessage]);
-      };
+          body: JSON.stringify({
+            input: message,
+            userId: token,
+          }),
+        }
+      );
 
-      mediaRecorder.start();
-      setIsRecording(true);
-    } catch (err) {
-      console.error("Error accessing microphone:", err);
-    }
-  };
-
-  const stopRecording = () => {
-    mediaRecorderRef.current?.stop();
-    setIsRecording(false);
-  };
-
-  const handlePlayAudio = (audioUrl: string) => {
-    if (playingAudio) {
-      playingAudio.pause();
-      playingAudio.currentTime = 0;
-      setIsPlaying(false);
-    }
-
-    const audio = new Audio(audioUrl);
-    audio.onended = () => {
-      setIsPlaying(false);
-      setPlayingAudio(null);
-    };
-    audio.play();
-    setPlayingAudio(audio);
-    setIsPlaying(true);
-  };
-
-  const handlePauseAudio = () => {
-    playingAudio?.pause();
-    setIsPlaying(false);
-    setPlayingAudio(null);
-  };
-
-  const generateWaveform = async (audioBlob: Blob): Promise<number[]> => {
-    const audioContext = new (window.AudioContext ||
-      (window as any).webkitAudioContext)();
-    const arrayBuffer = await audioBlob.arrayBuffer();
-    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-    const rawData = audioBuffer.getChannelData(0);
-    const samples = 40;
-    const blockSize = Math.floor(rawData.length / samples);
-    const peaks = [];
-
-    for (let i = 0; i < samples; i++) {
-      const start = blockSize * i;
-      let max = 0;
-      for (let j = 0; j < blockSize; j++) {
-        const abs = Math.abs(rawData[start + j]);
-        if (abs > max) max = abs;
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("API Error Details:", errorData);
+        throw new Error(`API error: ${response.status}`);
       }
-      peaks.push(max);
-    }
 
-    return peaks;
+      // Update the response handling in handleSend
+      const data = await response.json();
+      console.log(data);
+      if (data.message) {
+        // Changed from data.response to data.message
+        const aiResponse: Message = {
+          role: "assistant",
+          content: data.message, // Changed from data.input to data.message
+          timestamp: new Date(),
+        };
+
+        setMessages((prev) => [...prev, aiResponse]);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      const errorMessage: Message = {
+        role: "assistant",
+        content:
+          "Sorry, I'm having trouble connecting right now. Please try again later.",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -176,9 +95,9 @@ export default function AIPage() {
         </div>
         <div>
           <h1 className="text-xl font-semibold text-white">AI Assistant</h1>
-          <p className="text-sm text-zinc-400">
-            Chat with your Chimly using text or voice
-          </p>
+
+        <p className="text-sm text-zinc-400">Chat with your AI assistant</p>
+
         </div>
       </div>
 
@@ -204,45 +123,9 @@ export default function AIPage() {
                     : "bg-emerald-500/10 text-emerald-500"
                 )}
               >
-                {msg.audio ? (
-                  // Voice Message
-                  <div className="flex items-center gap-3">
-                    <button
-                      className="h-8 w-8 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center"
-                      onClick={() =>
-                        isPlaying
-                          ? handlePauseAudio()
-                          : handlePlayAudio(msg.audio!.url)
-                      }
-                    >
-                      {isPlaying ? (
-                        <PauseCircle className="w-5 h-5" />
-                      ) : (
-                        <PlayCircle className="w-5 h-5" />
-                      )}
-                    </button>
-                    <div className="flex flex-col w-full min-w-[160px]">
-                      <span className="text-xs text-zinc-400">
-                        {msg.audio.duration}
-                      </span>
-                      <div className="flex gap-[2px] h-8 items-center">
-                        {msg.audio.waveform?.map((peak, i) => (
-                          <div
-                            key={i}
-                            className="w-1 bg-emerald-500/40 rounded-full"
-                            style={{
-                              height: `${Math.max(peak * 100, 20)}%`,
-                            }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                    {msg.content}
-                  </p>
-                )}
+                <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                  {msg.content}
+                </p>
                 <span className="text-[10px] text-zinc-500 mt-1 block">
                   {msg.timestamp.toLocaleTimeString([], {
                     hour: "2-digit",
@@ -269,7 +152,7 @@ export default function AIPage() {
         </div>
       </div>
 
-      {/* Input Area - Fixed at Bottom */}
+      {/* Input Area */}
       <div className="p-4 border-t border-zinc-800 bg-black">
         <div className="flex gap-2 max-w-[1200px] mx-auto">
           <div className="flex-1 relative">
@@ -281,16 +164,6 @@ export default function AIPage() {
               placeholder="Type a message..."
               className="w-full bg-zinc-800/50 text-white rounded-lg pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
             />
-            <button
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-zinc-400 hover:text-white transition-colors"
-              onClick={isRecording ? stopRecording : startRecording}
-            >
-              {isRecording ? (
-                <MicOff className="w-4 h-4 text-red-500" />
-              ) : (
-                <Mic className="w-4 h-4" />
-              )}
-            </button>
           </div>
           <button
             className="p-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
