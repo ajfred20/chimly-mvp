@@ -11,33 +11,52 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
+    setSuccess("");
 
     try {
       const response = await fetch(
         "https://chimlybackendmain.onrender.com/api/auth/login",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
         }
       );
 
       const data = await response.json();
+      console.log("Login response:", data);
 
-      if (response.ok) {
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-        localStorage.setItem("userId", data.userId);
-        router.push("/dashboard");
-      } else {
-        console.error("Login failed:", data.message);
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
       }
-    } catch (error) {
-      console.error("Error during login:", error);
+
+      // Store tokens
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.userId);
+
+      // Set cookie
+      document.cookie = `token=${data.token}; path=/`;
+
+      // Show success message
+      setSuccess("Login successful!");
+
+      // Force a hard navigation
+      window.location.href = "/dashboard";
+    } catch (err: any) {
+      console.error("Login error:", err);
+      setError(err.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -96,6 +115,11 @@ export default function LoginPage() {
           >
             {loading ? "Signing in..." : "Continue"}
           </button>
+
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {success && (
+            <p className="text-emerald-500 text-sm text-center">{success}</p>
+          )}
         </form>
 
         <p className="mt-6 text-center text-sm text-zinc-500">
