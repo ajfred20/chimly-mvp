@@ -96,8 +96,7 @@ export default function AIPage() {
         <div>
           <h1 className="text-xl font-semibold text-white">AI Assistant</h1>
 
-        <p className="text-sm text-zinc-400">Chat with your AI assistant</p>
-
+          <p className="text-sm text-zinc-400">Chat with your AI assistant</p>
         </div>
       </div>
 
