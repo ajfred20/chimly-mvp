@@ -4,9 +4,10 @@ import { GithubIcon, SlackIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; 
 
 export default function SignUpPage() {
+  const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [username, setName] = useState<string>("");
