@@ -30,7 +30,7 @@ export default function Home() {
             </Link>
             <div className="flex items-center">
               <Link
-                href="/waitlist"
+                href="/login"
                 className="bg-black text-white px-4 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-colors"
               >
                 Get Started
