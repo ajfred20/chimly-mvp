@@ -15,6 +15,7 @@ import {
   Bot,
   Menu,
   ArrowLeft,
+  Zap,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -97,7 +98,7 @@ export default function DashboardLayout({
           <nav className="space-y-1">
             <Link
               href="/dashboard"
-              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-lg transition-colors ${
                 isCollapsed ? "lg:justify-center" : ""
               }`}
             >
@@ -106,18 +107,20 @@ export default function DashboardLayout({
               />
               <span className={isCollapsed ? "lg:hidden" : ""}>Home</span>
             </Link>
+
             <Link
               href="/dashboard/ai"
-              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-lg transition-colors ${
                 isCollapsed ? "lg:justify-center" : ""
               }`}
             >
               <Bot className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`} />
               <span className={isCollapsed ? "lg:hidden" : ""}>AI</span>
             </Link>
+
             <Link
               href="/dashboard/tasks"
-              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
+              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-lg transition-colors ${
                 isCollapsed ? "lg:justify-center" : ""
               }`}
             >
@@ -127,92 +130,82 @@ export default function DashboardLayout({
               <span className={isCollapsed ? "lg:hidden" : ""}>Tasks</span>
             </Link>
 
-            <Link
-              href="/dashboard/calendar"
-              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
-                isCollapsed ? "lg:justify-center" : ""
-              }`}
-            >
-              <Calendar
-                className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
-              />
-              <span className={isCollapsed ? "lg:hidden" : ""}>Calendar</span>
-            </Link>
-
-            <Link
-              href="/dashboard/analytics"
-              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
-                isCollapsed ? "lg:justify-center" : ""
-              }`}
-            >
-              <BarChart
-                className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
-              />
-              <span className={isCollapsed ? "lg:hidden" : ""}>Analytics</span>
-            </Link>
-
-            <Link
-              href="/dashboard/team"
-              className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
-                isCollapsed ? "lg:justify-center" : ""
-              }`}
-            >
-              <Users
-                className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
-              />
-              <span className={isCollapsed ? "lg:hidden" : ""}>Team</span>
-            </Link>
+            {/* Disabled links with Coming Soon badges */}
+            {[
+              {
+                href: "/dashboard/calendar",
+                icon: Calendar,
+                label: "Calendar",
+              },
+              {
+                href: "/dashboard/analytics",
+                icon: BarChart,
+                label: "Analytics",
+              },
+              { href: "/dashboard/team", icon: Users, label: "Team" },
+            ].map((item) => (
+              <div
+                key={item.href}
+                className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-500 rounded-lg ${
+                  isCollapsed ? "lg:justify-center" : ""
+                }`}
+              >
+                <item.icon
+                  className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
+                />
+                {!isCollapsed && (
+                  <div className="flex items-center justify-between w-full">
+                    <span>{item.label}</span>
+                    <div className="text-xs px-2 py-0.5 rounded-full bg-zinc-800/50">
+                      Coming Soon
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
           </nav>
 
-          {/* Secondary Navigation */}
+          {/* Settings Section */}
           <div className="mt-8">
             <h3
-              className={`px-3 text-xs font-semibold text-zinc-500 uppercase tracking-wider ${
+              className={`px-3 text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2 ${
                 isCollapsed ? "lg:hidden" : ""
               }`}
             >
               Settings
             </h3>
-            <nav className="mt-2 space-y-1">
-              <Link
-                href="/dashboard/settings"
-                className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
-                  isCollapsed ? "lg:justify-center" : ""
-                }`}
-              >
-                <Settings
-                  className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
-                />
-                <span className={isCollapsed ? "lg:hidden" : ""}>Settings</span>
-              </Link>
-
-              <Link
-                href="/dashboard/notifications"
-                className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
-                  isCollapsed ? "lg:justify-center" : ""
-                }`}
-              >
-                <Bell
-                  className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
-                />
-                <span className={isCollapsed ? "lg:hidden" : ""}>
-                  Notifications
-                </span>
-              </Link>
-
-              <Link
-                href="/help"
-                className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors ${
-                  isCollapsed ? "lg:justify-center" : ""
-                }`}
-              >
-                <HelpCircle
-                  className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
-                />
-                <span className={isCollapsed ? "lg:hidden" : ""}>
-                  Help & Support
-                </span>
-              </Link>
+            <nav className="space-y-1">
+              {[
+                {
+                  href: "/dashboard/settings",
+                  icon: Settings,
+                  label: "Settings",
+                },
+                {
+                  href: "/dashboard/notifications",
+                  icon: Bell,
+                  label: "Notifications",
+                },
+              ].map((item) => (
+                <div
+                  key={item.href}
+                  className={`flex items-center gap-3 px-3 py-2 text-sm font-medium text-zinc-500 rounded-lg ${
+                    isCollapsed ? "lg:justify-center" : ""
+                  }`}
+                >
+                  <item.icon
+                    className={`${isCollapsed ? "lg:w-8 lg:h-8" : "w-4 h-4"}`}
+                  />
+                  {!isCollapsed && (
+                    <div className="flex items-center justify-between w-full">
+                      <span>{item.label}</span>
+                      <div className="text-xs px-2 py-0.5 rounded-full bg-zinc-800/50">
+                        Coming Soon
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
             </nav>
           </div>
 

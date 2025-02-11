@@ -1,7 +1,7 @@
 "use client";
 
 import { Bot, Send } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -14,6 +14,25 @@ export default function AIPage() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Load messages from localStorage on mount
+  useEffect(() => {
+    const savedMessages = localStorage.getItem("aiConversation");
+    if (savedMessages) {
+      const parsedMessages = JSON.parse(savedMessages);
+      // Convert string timestamps back to Date objects
+      const messagesWithDates = parsedMessages.map((msg: any) => ({
+        ...msg,
+        timestamp: new Date(msg.timestamp),
+      }));
+      setMessages(messagesWithDates);
+    }
+  }, []);
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("aiConversation", JSON.stringify(messages));
+  }, [messages]);
 
   const handleSend = async () => {
     if (!message.trim()) return;
@@ -52,17 +71,14 @@ export default function AIPage() {
         throw new Error(`API error: ${response.status}`);
       }
 
-      // Update the response handling in handleSend
       const data = await response.json();
       console.log(data);
       if (data.message) {
-        // Changed from data.response to data.message
         const aiResponse: Message = {
           role: "assistant",
-          content: data.message, // Changed from data.input to data.message
+          content: data.message,
           timestamp: new Date(),
         };
-
         setMessages((prev) => [...prev, aiResponse]);
       }
     } catch (error) {
@@ -96,58 +112,62 @@ export default function AIPage() {
         <div>
           <h1 className="text-xl font-semibold text-white">Chimly</h1>
 
-          <p className="text-sm text-zinc-400">Chat with your AI powered task manager</p>
+          <p className="text-sm text-zinc-400">
+            Chat with your AI powered task manager
+          </p>
         </div>
       </div>
 
       {/* Chat Container */}
       <div className="flex-1 overflow-y-auto px-4">
-        <div className="max-w-[1200px] mx-auto space-y-4 pb-4">
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={cn(
-                "flex flex-col max-w-[85%]",
-                msg.role === "assistant" ? "items-start" : "items-end ml-auto"
-              )}
-            >
-              <span className="text-xs text-zinc-500 mb-1 px-1">
-                {msg.role === "assistant" ? "Chimly" : "You"}
-              </span>
+        <div className="max-w-[1200px] mx-auto flex flex-col justify-end min-h-full">
+          <div className="space-y-4 pb-4">
+            {messages.map((msg, index) => (
               <div
+                key={index}
                 className={cn(
-                  "px-4 py-3 rounded-lg",
-                  msg.role === "assistant"
-                    ? "bg-zinc-800/50 text-white"
-                    : "bg-emerald-500/10 text-emerald-500"
+                  "flex flex-col max-w-[85%]",
+                  msg.role === "assistant" ? "items-start" : "items-end ml-auto"
                 )}
               >
-                <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                  {msg.content}
-                </p>
-                <span className="text-[10px] text-zinc-500 mt-1 block">
-                  {msg.timestamp.toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
+                <span className="text-xs text-zinc-500 mb-1 px-1">
+                  {msg.role === "assistant" ? "Chimly" : "You"}
                 </span>
-              </div>
-            </div>
-          ))}
-          {isLoading && (
-            <div className="flex flex-col items-start max-w-[85%]">
-              <span className="text-xs text-zinc-500 mb-1 px-1">
-                AI Assistant
-              </span>
-              <div className="px-4 py-3 bg-zinc-800/50 rounded-lg">
-                <div className="flex gap-1">
-                  <div className="w-1.5 h-1.5 bg-emerald-500/50 rounded-full animate-pulse" />
-                  <div className="w-1.5 h-1.5 bg-emerald-500/50 rounded-full animate-pulse delay-150" />
-                  <div className="w-1.5 h-1.5 bg-emerald-500/50 rounded-full animate-pulse delay-300" />
+                <div
+                  className={cn(
+                    "px-4 py-3 rounded-lg",
+                    msg.role === "assistant"
+                      ? "bg-zinc-800/50 text-white"
+                      : "bg-emerald-500/10 text-emerald-500"
+                  )}
+                >
+                  <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                    {msg.content}
+                  </p>
+                  <span className="text-[10px] text-zinc-500 mt-1 block">
+                    {msg.timestamp.toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
                 </div>
               </div>
-            </div>
-          )}
+            ))}
+            {isLoading && (
+              <div className="flex flex-col items-start max-w-[85%]">
+                <span className="text-xs text-zinc-500 mb-1 px-1">
+                  AI Assistant
+                </span>
+                <div className="px-4 py-3 bg-zinc-800/50 rounded-lg">
+                  <div className="flex gap-1">
+                    <div className="w-1.5 h-1.5 bg-emerald-500/50 rounded-full animate-pulse" />
+                    <div className="w-1.5 h-1.5 bg-emerald-500/50 rounded-full animate-pulse delay-150" />
+                    <div className="w-1.5 h-1.5 bg-emerald-500/50 rounded-full animate-pulse delay-300" />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
