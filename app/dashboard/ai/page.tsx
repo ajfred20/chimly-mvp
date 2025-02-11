@@ -87,7 +87,7 @@ export default function AIPage() {
   };
 
   return (
-    <div className="h-[calc(100vh-2rem)] flex flex-col bg-black overflow-hidden overflow-y-hidden">
+    <div className="md:h-[calc(100vh-2rem)] h-screen flex flex-col bg-black overflow-hidden overflow-y-hidden">
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 bg-emerald-500/10 rounded-lg">
