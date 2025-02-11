@@ -94,9 +94,9 @@ export default function AIPage() {
           <Bot className="w-5 h-5 text-emerald-500" />
         </div>
         <div>
-          <h1 className="text-xl font-semibold text-white">AI Assistant</h1>
+          <h1 className="text-xl font-semibold text-white">Chimly</h1>
 
-          <p className="text-sm text-zinc-400">Chat with your AI assistant</p>
+          <p className="text-sm text-zinc-400">Chat with your AI powered task manager</p>
         </div>
       </div>
 
