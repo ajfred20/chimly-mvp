@@ -1,6 +1,14 @@
 "use client";
 
-import { CheckSquare, Clock, Filter, Plus, Search, Tag } from "lucide-react";
+import {
+  CheckSquare,
+  Clock,
+  Filter,
+  Plus,
+  Search,
+  Tag,
+  MoreVertical,
+} from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -22,38 +30,86 @@ interface Task {
 
 export default function TasksPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const token = localStorage.getItem("userId");
+        const token = localStorage.getItem("token");
+        const userId = localStorage.getItem("userId");
+
+        console.log("Token:", token);
+        console.log("UserId:", userId);
+
+        if (!token || !userId) {
+          throw new Error("No authentication token found");
+        }
+
         const response = await fetch(
-          `https://chimlybackendmain.onrender.com/api/schedules/user/${token}`,
+          `https://chimlybackendmain.onrender.com/api/schedules/user/${userId}`,
           {
+            method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
             },
+            body: JSON.stringify({
+              userId: userId,
+            }),
           }
         );
 
+        const responseText = await response.text();
+        console.log("Raw Response:", responseText);
+
         if (!response.ok) {
-          throw new Error("Failed to fetch tasks");
+          throw new Error(`Failed to fetch tasks: ${responseText}`);
         }
 
-        const data = await response.json();
-        setTasks(data.schedules || []); // Updated to use schedules from response
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
+        try {
+          const data = JSON.parse(responseText);
+          console.log("API Response Data:", data);
+          console.log("Schedules:", data.schedules);
+          setTasks(data.schedules || []);
+        } catch (parseError) {
+          console.error("Error parsing response:", parseError);
+          throw new Error("Invalid response format from server");
+        }
+      } catch (err: any) {
+        console.error("Error fetching tasks:", err);
+        setError(err.message || "Failed to load tasks");
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
     fetchTasks();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-emerald-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full text-zinc-400">
+        <p>{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 sm:p-8">
@@ -105,51 +161,22 @@ export default function TasksPage() {
 
         {/* Tasks List */}
         <div className="space-y-4">
-          {isLoading ? (
-            <div className="text-center text-zinc-400">Loading tasks...</div>
-          ) : tasks.length === 0 ? (
+          {tasks.length === 0 ? (
             <div className="text-center text-zinc-400">No tasks found</div>
           ) : (
             tasks.map((task) => (
               <div
                 key={task._id}
-                className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg hover:bg-zinc-800/50 transition-colors group"
+                className="p-4 bg-zinc-900 border border-zinc-800 rounded-xl"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                  <div className="flex items-center gap-4 flex-1">
-                    <div className="p-2 bg-emerald-500/10 rounded-lg">
-                      <CheckSquare className="w-5 h-5 text-emerald-500" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-white font-medium truncate">
-                          {task.title}
-                        </h3>
-                        <span className="px-2 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-500">
-                          {task.status}
-                        </span>
-                      </div>
-                      <p className="text-sm text-zinc-400 line-clamp-1">
-                        {task.description}
-                      </p>
-                    </div>
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="font-medium text-white">{task.title}</h3>
+                    <p className="text-sm text-zinc-400">{task.description}</p>
                   </div>
-                  <div className="flex items-center gap-4 ml-11 sm:ml-0">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center ring-2 ring-black">
-                        <span className="text-xs font-medium text-blue-500">
-                          {task.assignedTo?.substring(0, 2).toUpperCase() ||
-                            "NA"}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1 text-zinc-400">
-                      <Clock className="w-4 h-4" />
-                      <span className="text-sm whitespace-nowrap">
-                        Due: {new Date(task.dueDate).toLocaleDateString()}
-                      </span>
-                    </div>
-                  </div>
+                  <button className="p-1 hover:bg-zinc-800 rounded">
+                    <MoreVertical className="w-4 h-4 text-zinc-400" />
+                  </button>
                 </div>
               </div>
             ))

@@ -19,19 +19,36 @@ export default function AIPage() {
   useEffect(() => {
     const savedMessages = localStorage.getItem("aiConversation");
     if (savedMessages) {
-      const parsedMessages = JSON.parse(savedMessages);
-      // Convert string timestamps back to Date objects
-      const messagesWithDates = parsedMessages.map((msg: any) => ({
-        ...msg,
-        timestamp: new Date(msg.timestamp),
-      }));
-      setMessages(messagesWithDates);
+      try {
+        const parsedMessages = JSON.parse(savedMessages, (key, value) => {
+          // Convert ISO date strings back to Date objects
+          if (key === "timestamp" && value) {
+            return new Date(value);
+          }
+          return value;
+        });
+        setMessages(parsedMessages);
+      } catch (error) {
+        console.error("Error loading messages:", error);
+        localStorage.removeItem("aiConversation"); // Clear invalid data
+      }
     }
   }, []);
 
   // Save messages to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem("aiConversation", JSON.stringify(messages));
+    try {
+      const serializedMessages = JSON.stringify(messages, (key, value) => {
+        // Convert Date objects to ISO strings for storage
+        if (value instanceof Date) {
+          return value.toISOString();
+        }
+        return value;
+      });
+      localStorage.setItem("aiConversation", serializedMessages);
+    } catch (error) {
+      console.error("Error saving messages:", error);
+    }
   }, [messages]);
 
   const handleSend = async () => {
