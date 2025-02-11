@@ -112,7 +112,7 @@ export default function AIPage() {
               )}
             >
               <span className="text-xs text-zinc-500 mb-1 px-1">
-                {msg.role === "assistant" ? "AI Assistant" : "You"}
+                {msg.role === "assistant" ? "Chimly" : "You"}
               </span>
               <div
                 className={cn(
