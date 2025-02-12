@@ -1,6 +1,6 @@
 # Chimly - Your AI Task Manager 🤖
 
-![Chimly Preview](https://raw.githubusercontent.com/ajfred20/chimly/main/public/assets/preview.png)
+![Chimly Preview](https://raw.githubusercontent.com/ajfred20/chimly-mvp/main/public/assets/preview.png)
 
 > 🌟 A modern AI Task manager website built with Next.js 15, Tailwind CSS, and Framer Motion
 
