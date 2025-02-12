@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://chimly.vercel.app",
+    url: "https://chimlyai.com",
     siteName: "Chimly AI",
     title: "Chimly AI | Operational Intelligence for Teams",
     description: "Simplify your life, one task at a time",
@@ -48,6 +48,29 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          property="og:title"
+          content="Chimly AI | Operational Intelligence for Teams"
+        />
+        <meta
+          property="og:description"
+          content="Simplify your life, one task at a time"
+        />
+        <meta property="og:image" content="/assets/chimly.png" />
+        <meta property="og:url" content="https://chimly.ai" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Chimly AI | Operational Intelligence for Teams"
+        />
+        <meta
+          name="twitter:description"
+          content="Simplify your life, one task at a time"
+        />
+        <meta name="twitter:image" content="/assets/chimly.png" />
+      </head>
       <body>
         {children}
         <Toaster
