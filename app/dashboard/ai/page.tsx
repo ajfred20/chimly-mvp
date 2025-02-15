@@ -91,7 +91,7 @@ export default function AIPage() {
     setMessages((prev) => [...prev, userMessage]);
     setMessage("");
     setIsLoading(true);
-
+      
     const thinkingMessage: Message = {
       role: "assistant",
       content: [
