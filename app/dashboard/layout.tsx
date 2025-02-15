@@ -43,7 +43,7 @@ export default function DashboardLayout({
       {/* Sidebar with Mobile Toggle */}
       <div className="relative z-40">
         {/* Mobile Menu Button - Always Visible */}
-        <button
+          <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
           className="lg:hidden fixed top-4 left-4 p-2 bg-zinc-800 rounded-lg"
         >
@@ -91,7 +91,7 @@ export default function DashboardLayout({
                   isCollapsed ? "lg:w-6 lg:h-6" : "w-4 h-4"
                 } text-white`}
               />
-            </button>
+          </button>
           </div>
 
           {/* Navigation */}

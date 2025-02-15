@@ -13,13 +13,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://chimly.ai",
+    url: "https://chimlyai.com",
     siteName: "Chimly AI",
     title: "Chimly AI | Operational Intelligence for Teams",
     description: "Simplify your life, one task at a time",
     images: [
       {
-        url: "https://chimly.ai/assets/chimly.png",
+        url: "/assets/chimly.png",
         width: 1200,
         height: 630,
         alt: "Chimly AI",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Chimly AI | Operational Intelligence for Teams",
     description: "Simplify your life, one task at a time",
-    images: ["https://chimly.ai/assets/chimly.png"],
+    images: ["/assets/chimly.png"],
     creator: "@iamajfred_",
   },
   icons: {
@@ -57,10 +57,7 @@ export default function RootLayout({
           property="og:description"
           content="Simplify your life, one task at a time"
         />
-        <meta
-          property="og:image"
-          content="https://chimly.ai/assets/chimly.png"
-        />
+        <meta property="og:image" content="/assets/chimly.png" />
         <meta property="og:url" content="https://chimly.ai" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -72,10 +69,7 @@ export default function RootLayout({
           name="twitter:description"
           content="Simplify your life, one task at a time"
         />
-        <meta
-          name="twitter:image"
-          content="https://chimly.ai/assets/chimly.png"
-        />
+        <meta name="twitter:image" content="/assets/chimly.png" />
       </head>
       <body>
         {children}
