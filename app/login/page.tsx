@@ -19,7 +19,7 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
     setSuccess("");
-
+    
     try {
       const response = await fetch(
         "https://chimlybackendmain.onrender.com/api/auth/login",
@@ -101,7 +101,6 @@ export default function LoginPage() {
             </label>
             <input
               id="password"
-              type="password"
               value={password}
               required
               onChange={(e) => setPassword(e.target.value)}
