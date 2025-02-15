@@ -209,17 +209,17 @@ export default function DashboardLayout({
             </nav>
           </div>
 
-          {/* User Section */}
+          {/* User Section - moved to bottom */}
           <div
-            className={`mt-auto pt-4 border-t border-zinc-800 ${
-              isCollapsed ? "lg:hidden" : ""
-            }`}
+            className={`fixed bottom-0 left-0 ${
+              isCollapsed ? "lg:w-20" : "w-64"
+            } pt-4 border-t border-zinc-800 bg-black`}
           >
             <div className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer">
               <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center">
                 <span className="text-sm font-medium text-emerald-500">JD</span>
               </div>
-              <div className="flex-1 min-w-0">
+              <div className={`flex-1 min-w-0 ${isCollapsed ? "lg:hidden" : ""}`}>
                 <p className="text-sm font-medium text-white truncate">
                   John Doe
                 </p>
@@ -227,7 +227,7 @@ export default function DashboardLayout({
                   john@example.com
                 </p>
               </div>
-              <LogOut className="w-4 h-4 text-zinc-400" />
+              <LogOut className={`w-4 h-4 text-zinc-400 ${isCollapsed ? "lg:hidden" : ""}`} />
             </div>
           </div>
         </aside>

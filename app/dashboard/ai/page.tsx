@@ -3,6 +3,7 @@
 import { Bot, Send, Plus, Calendar, Clock, Target, Brain, Sparkles, Loader2, LucideIcon } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ThinkingStep {
   icon: LucideIcon;
@@ -213,79 +214,99 @@ export default function AIPage() {
             </div>
           )}
           <div className="space-y-3 pb-4">
-            {messages.map((msg) => (
-              <div
-                key={msg.id || `temp-${Date.now()}`}
-                className={cn(
-                  "flex flex-col max-w-[90%] sm:max-w-[85%] group",
-                  msg.role === "assistant" ? "items-start" : "items-end ml-auto"
-                )}
-              >
-                <div className="flex items-center gap-2 mb-1 md:mb-1.5 px-1">
-                  {msg.role === "assistant" ? (
-                    <div className="flex items-center gap-1.5 md:gap-2">
-                      <div className="p-0.5 md:p-1 bg-emerald-500/10 rounded-md">
-                        <Bot className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-500" />
-                      </div>
-                      <span className="text-[10px] md:text-xs font-medium text-emerald-500">Chimly</span>
-                    </div>
-                  ) : (
-                    <span className="text-[10px] md:text-xs font-medium text-blue-400">You</span>
-                  )}
-                  <span className="text-[8px] md:text-[10px] text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {msg.timestamp.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </span>
-                </div>
-                <div
+            <AnimatePresence>
+              {messages.map((msg) => (
+                <motion.div
+                  key={msg.id || `temp-${Date.now()}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                   className={cn(
-                    "px-3 py-2 rounded-lg",
-                    msg.role === "assistant"
-                      ? msg.thinking
-                        ? "bg-zinc-900/90 border border-emerald-500/20"
-                        : "bg-zinc-900 text-white"
-                      : "bg-[#1e2c32] text-white"
+                    "flex flex-col max-w-[90%] sm:max-w-[85%] group",
+                    msg.role === "assistant" ? "items-start" : "items-end ml-auto"
                   )}
                 >
-                  {msg.thinking ? (
-                    <div className="space-y-2 md:space-y-3">
-                      {Array.isArray(msg.content) && msg.content.map((item: ThinkingStep, i: number) => (
-                        <div key={i} className="flex items-center gap-2 md:gap-3 text-xs md:text-sm">
-                          <div className={cn(
-                            "p-1 md:p-1.5 rounded-md",
-                            i === 0 ? "bg-emerald-500/20 text-emerald-400" :
-                            i === 1 ? "bg-purple-500/20 text-purple-400" :
-                            "bg-blue-500/20 text-blue-400"
-                          )}>
-                            <item.icon className={cn(
-                              "w-3 h-3 md:w-4 md:h-4",
-                              i === 1 && "animate-spin"
-                            )} />
-                          </div>
-                          <span className={cn(
-                            "font-medium",
-                            i === 0 ? "text-emerald-400" :
-                            i === 1 ? "text-purple-400" :
-                            "text-blue-400"
-                          )}>
-                            {item.text}
-                          </span>
+                  <div className="flex items-center gap-2 mb-1 md:mb-1.5 px-1">
+                    {msg.role === "assistant" ? (
+                      <div className="flex items-center gap-1.5 md:gap-2">
+                        <div className="p-0.5 md:p-1 bg-emerald-500/10 rounded-md">
+                          <Bot className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-500" />
                         </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className={cn(
-                      "text-xs md:text-sm leading-relaxed",
-                      msg.role === "assistant" ? "text-zinc-100" : "text-blue-50"
-                    )}>
-                      {typeof msg.content === 'string' ? msg.content : ''}
-                    </p>
-                  )}
-                </div>
-              </div>
-            ))}
+                        <span className="text-[10px] md:text-xs font-medium text-emerald-500">Chimly</span>
+                      </div>
+                    ) : (
+                      <span className="text-[10px] md:text-xs font-medium text-blue-400">You</span>
+                    )}
+                    <span className="text-[8px] md:text-[10px] text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                      {msg.timestamp.toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
+                  </div>
+                  <div
+                    className={cn(
+                      "px-3 py-2 rounded-lg",
+                      msg.role === "assistant"
+                        ? msg.thinking
+                          ? "bg-zinc-900/90 border border-emerald-500/20"
+                          : "bg-zinc-900 text-white"
+                        : "bg-[#1e2c32] text-white"
+                    )}
+                  >
+                    {msg.thinking ? (
+                      <motion.div 
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="space-y-2 md:space-y-3"
+                      >
+                        {Array.isArray(msg.content) && msg.content.map((item: ThinkingStep, i: number) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.15 }}
+                            className="flex items-center gap-2 md:gap-3 text-xs md:text-sm"
+                          >
+                            <div className={cn(
+                              "p-1 md:p-1.5 rounded-md",
+                              i === 0 ? "bg-emerald-500/20 text-emerald-400" :
+                              i === 1 ? "bg-purple-500/20 text-purple-400" :
+                              "bg-blue-500/20 text-blue-400"
+                            )}>
+                              <item.icon className={cn(
+                                "w-3 h-3 md:w-4 md:h-4",
+                                i === 1 && "animate-spin"
+                              )} />
+                            </div>
+                            <span className={cn(
+                              "font-medium",
+                              i === 0 ? "text-emerald-400" :
+                              i === 1 ? "text-purple-400" :
+                              "text-blue-400"
+                            )}>
+                              {item.text}
+                            </span>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    ) : (
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className={cn(
+                          "text-xs md:text-sm leading-relaxed",
+                          msg.role === "assistant" ? "text-zinc-100" : "text-blue-50"
+                        )}
+                      >
+                        {typeof msg.content === 'string' ? msg.content : ''}
+                      </motion.p>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
             <div ref={messagesEndRef} />
           </div>
         </div>
@@ -294,20 +315,30 @@ export default function AIPage() {
       {/* Input Area with Suggestion Chips */}
       <div className="flex-none p-4 border-t border-zinc-800/50 bg-black">
         <div className="flex flex-col gap-3 max-w-[1200px] mx-auto">
-          {message.trim() === "" && (
-            <div className="flex flex-wrap gap-2">
-              {suggestionChips.map((chip, index) => (
-                <button
-                  key={index}
-                  onClick={() => setMessage(chip.text)}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-sm transition-colors"
-                >
-                  <chip.icon className="w-4 h-4 text-emerald-500" />
-                  {chip.text}
-                </button>
-              ))}
-            </div>
-          )}
+          <AnimatePresence>
+            {message.trim() === "" && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="flex flex-wrap gap-2"
+              >
+                {suggestionChips.map((chip, index) => (
+                  <motion.button
+                    key={index}
+                    initial={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => setMessage(chip.text)}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-sm transition-colors"
+                  >
+                    <chip.icon className="w-4 h-4 text-emerald-500" />
+                    {chip.text}
+                  </motion.button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
           
           <div className="flex gap-2">
             <div className="flex-1 relative">
@@ -320,13 +351,15 @@ export default function AIPage() {
                 className="w-full bg-zinc-900 text-white rounded-lg pl-4 pr-12 py-3 focus:outline-none focus:ring-1 focus:ring-emerald-500/20"
               />
             </div>
-            <button
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               className="p-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={handleSend}
               disabled={isLoading || !message.trim()}
             >
               <Send className="w-4 h-4" />
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
