@@ -165,7 +165,7 @@ export default function AIPage() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-black overflow-hidden">
+    <div className="h-screen flex flex-col bg-black overflow-y-hidden">
       {/* Header */}
       <div className="flex-none p-4 md:p-6 border-b border-zinc-800/50">
         <div className="flex items-center gap-3 md:gap-4 max-w-[1200px] mx-auto">

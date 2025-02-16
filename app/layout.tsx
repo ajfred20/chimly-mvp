@@ -3,9 +3,9 @@ import "./globals.css";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Chimly AI | Operational Intelligence for Teams",
-  description:
-    "Handle your daily tasks like a pro with our loaded AI features. Chimly helps you organize, automate, and optimize your workflow.",
+  title: "Chimly - AI Task Management",
+  description: "Manage your tasks and schedule efficiently with AI assistance",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://chimly.com"),
   keywords: ["AI", "Task Management", "Productivity", "Automation", "Workflow"],
   authors: [{ name: "Chimly AI" }],
   creator: "Aj Fred",
@@ -13,24 +13,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://chimlyai.com",
-    siteName: "Chimly AI",
-    title: "Chimly AI | Operational Intelligence for Teams",
-    description: "Simplify your life, one task at a time",
+    url: "https://chimly.com",
+    siteName: "Chimly",
+    title: "Chimly - AI Task Management",
+    description: "Manage your tasks and schedule efficiently with AI assistance",
     images: [
       {
-        url: "/assets/chimly.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Chimly AI",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chimly AI | Operational Intelligence for Teams",
-    description: "Simplify your life, one task at a time",
-    images: ["/assets/chimly.png"],
+    title: "Chimly - AI Task Management",
+    description: "Manage your tasks and schedule efficiently with AI assistance",
+    images: ["/og-image.jpg"],
     creator: "@iamajfred_",
   },
   icons: {
@@ -51,25 +50,25 @@ export default function RootLayout({
       <head>
         <meta
           property="og:title"
-          content="Chimly AI | Operational Intelligence for Teams"
+          content="Chimly - AI Task Management"
         />
         <meta
           property="og:description"
-          content="Simplify your life, one task at a time"
+          content="Manage your tasks and schedule efficiently with AI assistance"
         />
-        <meta property="og:image" content="/assets/chimly.png" />
-        <meta property="og:url" content="https://chimly.ai" />
+        <meta property="og:image" content="/og-image.jpg" />
+        <meta property="og:url" content="https://chimly.com" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Chimly AI | Operational Intelligence for Teams"
+          content="Chimly - AI Task Management"
         />
         <meta
           name="twitter:description"
-          content="Simplify your life, one task at a time"
+          content="Manage your tasks and schedule efficiently with AI assistance"
         />
-        <meta name="twitter:image" content="/assets/chimly.png" />
+        <meta name="twitter:image" content="/og-image.jpg" />
       </head>
       <body>
         {children}
