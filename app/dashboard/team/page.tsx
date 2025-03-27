@@ -1,8 +1,73 @@
 "use client";
 
-import { Mail, MoreVertical, Plus, Search } from "lucide-react";
+import { useState } from "react";
+import { Mail, MoreVertical, Plus, Search, Shield, ChevronDown } from "lucide-react";
+import { toast } from "sonner";
+
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  email: string;
+  avatar: string;
+  color: string;
+  isAdmin?: boolean;
+}
+
+const roles = [
+  "Admin",
+  "Product Manager",
+  "Developer",
+  "Designer",
+  "Content Writer",
+  "Viewer"
+];
 
 export default function TeamPage() {
+  const [showRoleMenu, setShowRoleMenu] = useState<string | null>(null);
+  const [members, setMembers] = useState<TeamMember[]>([
+    {
+      id: "1",
+      name: "Sarah Johnson",
+      role: "Product Manager",
+      email: "sarah@chimly.ai",
+      avatar: "SJ",
+      color: "emerald",
+      isAdmin: true,
+    },
+    // ... other members
+  ]);
+
+  const handleRoleChange = async (memberId: string, newRole: string) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("/api/team/roles", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          userId: memberId,
+          role: newRole,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update role");
+      }
+
+      setMembers(members.map(member => 
+        member.id === memberId ? { ...member, role: newRole } : member
+      ));
+      setShowRoleMenu(null);
+      toast.success(`Updated role to ${newRole}`);
+    } catch (error) {
+      console.error("Error updating role:", error);
+      toast.error("Failed to update role");
+    }
+  };
+
   return (
     <div className="p-8">
       <div className="max-w-7xl mx-auto">
@@ -27,49 +92,48 @@ export default function TeamPage() {
 
         {/* Team Members Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Team Member Card */}
-          {[
-            {
-              name: "Sarah Johnson",
-              role: "Product Designer",
-              email: "sarah@chimly.ai",
-              avatar: "SJ",
-              color: "emerald",
-            },
-            {
-              name: "Mike Wilson",
-              role: "Frontend Developer",
-              email: "mike@chimly.ai",
-              avatar: "MW",
-              color: "blue",
-            },
-            {
-              name: "Anna Brown",
-              role: "Project Manager",
-              email: "anna@chimly.ai",
-              avatar: "AB",
-              color: "purple",
-            },
-            // Add more team members as needed
-          ].map((member) => (
+          {members.map((member) => (
             <div
               key={member.email}
               className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl hover:bg-zinc-800/50 transition-colors"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-4">
-                  <div
-                    className={`w-12 h-12 rounded-full bg-${member.color}-500/10 flex items-center justify-center`}
-                  >
-                    <span
-                      className={`text-lg font-medium text-${member.color}-500`}
-                    >
+                  <div className={`w-12 h-12 rounded-full bg-${member.color}-500/10 flex items-center justify-center`}>
+                    <span className={`text-lg font-medium text-${member.color}-500`}>
                       {member.avatar}
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-white font-medium">{member.name}</h3>
-                    <p className="text-sm text-zinc-400">{member.role}</p>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-white font-medium">{member.name}</h3>
+                      {member.isAdmin && (
+                        <Shield className="w-4 h-4 text-emerald-500" />
+                      )}
+                    </div>
+                    <div className="relative">
+                      <button
+                        onClick={() => setShowRoleMenu(member.id)}
+                        className="text-sm text-zinc-400 flex items-center gap-1 hover:text-white transition-colors"
+                      >
+                        {member.role}
+                        <ChevronDown className="w-4 h-4" />
+                      </button>
+                      
+                      {showRoleMenu === member.id && (
+                        <div className="absolute top-full left-0 mt-1 w-48 py-1 bg-zinc-800 rounded-lg shadow-lg z-10">
+                          {roles.map((role) => (
+                            <button
+                              key={role}
+                              onClick={() => handleRoleChange(member.id, role)}
+                              className="w-full px-4 py-2 text-sm text-left text-zinc-300 hover:bg-zinc-700 hover:text-white transition-colors"
+                            >
+                              {role}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <button className="p-1 text-zinc-400 hover:text-white rounded-lg transition-colors">
