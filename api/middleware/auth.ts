@@ -1,19 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
+export const authenticateToken = (req: Request, res: Response, next: NextFunction): void => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-
+  
   if (!token) {
-    return res.status(401).json({ error: 'Access token required' });
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
   }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
-    req.user = decoded as { id: string; email: string };
+  
+  jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key', (err, user) => {
+    if (err) {
+      res.status(403).json({ error: 'Forbidden' });
+      return;
+    }
+    
+    req.user = user as any; // Type assertion to avoid additional type issues
     next();
-  } catch (error) {
-    return res.status(403).json({ error: 'Invalid or expired token' });
-  }
+  });
 };

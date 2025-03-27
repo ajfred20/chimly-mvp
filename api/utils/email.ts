@@ -4,8 +4,8 @@ const transporter = nodemailer.createTransport({
   // Configure your email service
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
+    user: process.env.EMAIL_USER || 'defaultUser@example.com',
+    pass: process.env.EMAIL_PASSWORD || 'defaultPassword',
   },
 });
 
@@ -13,7 +13,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   const verificationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/verify-email?token=${token}`;
 
   await transporter.sendMail({
-    from: process.env.EMAIL_USER,
+    from: process.env.EMAIL_FROM || 'no-reply@example.com',
     to: email,
     subject: 'Verify your email address',
     html: `
@@ -28,7 +28,7 @@ export const sendTeamInviteEmail = async (email: string, token: string, teamName
   const inviteUrl = `${process.env.NEXT_PUBLIC_APP_URL}/team/join?token=${token}`;
 
   await transporter.sendMail({
-    from: process.env.EMAIL_USER,
+    from: process.env.EMAIL_FROM || 'no-reply@example.com',
     to: email,
     subject: `Invitation to join ${teamName}`,
     html: `
