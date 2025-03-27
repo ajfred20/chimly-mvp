@@ -5,7 +5,7 @@ export async function PUT(req: Request) {
     const { userId, role } = await req.json();
     const token = req.headers.get("Authorization")?.split(" ")[1];
 
-    const response = await fetch("https://chimlybackendmain.onrender.com/api/team/roles", {
+    const response = await fetch("/api/team/roles", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

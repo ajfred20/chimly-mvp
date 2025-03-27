@@ -1,28 +1,28 @@
 import { NextResponse } from "next/server";
 
-export async function PUT(req: Request) {
+export async function POST(req: Request) {
   try {
-    const { name } = await req.json();
+    const { email, role } = await req.json();
     const token = req.headers.get("Authorization")?.split(" ")[1];
 
-    const response = await fetch("/api/user/profile", {
-      method: "PUT",
+    const response = await fetch("/api/team/invite", { // Updated endpoint
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({ email, role }),
     });
 
     if (!response.ok) {
-      throw new Error("Failed to update profile");
+      throw new Error("Failed to send invite");
     }
 
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to update profile" },
+      { error: "Failed to send invite" },
       { status: 500 }
     );
   }

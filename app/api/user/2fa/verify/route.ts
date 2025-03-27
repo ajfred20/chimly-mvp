@@ -5,7 +5,7 @@ export async function POST(req: Request) {
     const { code } = await req.json();
     const token = req.headers.get("Authorization")?.split(" ")[1];
 
-    const response = await fetch("https://chimlybackendmain.onrender.com/api/user/2fa/verify", {
+    const response = await fetch("/api/user/2fa/verify", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

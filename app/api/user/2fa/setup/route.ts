@@ -4,7 +4,7 @@ export async function POST(req: Request) {
   try {
     const token = req.headers.get("Authorization")?.split(" ")[1];
 
-    const response = await fetch("https://chimlybackendmain.onrender.com/api/user/2fa/setup", {
+    const response = await fetch("/api/user/2fa/setup", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

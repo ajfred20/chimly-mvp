@@ -1,12 +1,14 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { authenticateToken } from '../middleware/auth';
 import { generateSecret, verifyToken } from 'speakeasy';
 import { User } from '../models/User';
+import { sendVerificationEmail } from '../utils/email';
+import { generateVerificationToken } from '../utils/tokens';
 
 const router = express.Router();
 
 // Update user profile
-router.put('/profile', authenticateToken, async (req, res) => {
+router.put('/profile', authenticateToken, async (req: Request, res: Response) => {
   try {
     const { name } = req.body;
     const userId = req.user.id;
@@ -24,7 +26,7 @@ router.put('/profile', authenticateToken, async (req, res) => {
 });
 
 // Setup 2FA
-router.post('/2fa/setup', authenticateToken, async (req, res) => {
+router.post('/2fa/setup', authenticateToken, async (req: Request, res: Response) => {
   try {
     const userId = req.user.id;
     const secret = generateSecret({
@@ -47,7 +49,7 @@ router.post('/2fa/setup', authenticateToken, async (req, res) => {
 });
 
 // Verify 2FA
-router.post('/2fa/verify', authenticateToken, async (req, res) => {
+router.post('/2fa/verify', authenticateToken, async (req: Request, res: Response) => {
   try {
     const { code } = req.body;
     const userId = req.user.id;
@@ -78,7 +80,7 @@ router.post('/2fa/verify', authenticateToken, async (req, res) => {
 });
 
 // Send email verification
-router.post('/email/verify/send', authenticateToken, async (req, res) => {
+router.post('/email/verify/send', authenticateToken, async (req: Request, res: Response) => {
   try {
     const userId = req.user.id;
     const user = await User.findById(userId);

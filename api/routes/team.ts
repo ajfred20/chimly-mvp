@@ -1,12 +1,20 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { authenticateToken } from '../middleware/auth';
 import { Team, TeamMember } from '../models/Team';
 import { User } from '../models/User';
+import { sendTeamInviteEmail } from '../utils/email';
+import { generateInviteToken } from '../utils/tokens';
+
+interface TeamMember {
+  userId: string;
+  role: string;
+  joinedAt: Date;
+}
 
 const router = express.Router();
 
 // Update team member role
-router.put('/roles', authenticateToken, async (req, res) => {
+router.put('/roles', authenticateToken, async (req: Request, res: Response) => {
   try {
     const { userId, role } = req.body;
     const adminId = req.user.id;
@@ -42,7 +50,7 @@ router.put('/roles', authenticateToken, async (req, res) => {
 });
 
 // Get team members
-router.get('/members', authenticateToken, async (req, res) => {
+router.get('/members', authenticateToken, async (req: Request, res: Response) => {
   try {
     const team = await Team.findOne({
       'members.userId': req.user.id
@@ -52,7 +60,7 @@ router.get('/members', authenticateToken, async (req, res) => {
       return res.status(404).json({ error: 'Team not found' });
     }
 
-    const members = team.members.map(member => ({
+    const members = team.members.map((member: any) => ({
       id: member.userId._id,
       name: member.userId.name,
       email: member.userId.email,
@@ -67,7 +75,7 @@ router.get('/members', authenticateToken, async (req, res) => {
 });
 
 // Invite team member
-router.post('/invite', authenticateToken, async (req, res) => {
+router.post('/invite', authenticateToken, async (req: Request, res: Response) => {
   try {
     const { email, role } = req.body;
     const adminId = req.user.id;
