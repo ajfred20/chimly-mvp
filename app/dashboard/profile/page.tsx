@@ -10,7 +10,7 @@ import {
   AlertCircle,
   Loader2
 } from "lucide-react";
-import QRCode from 'qrcode.react'; // You'll need to install this package
+import { QRCodeSVG } from 'qrcode.react';
 import { toast } from "sonner";
 
 interface ProfileSection {
@@ -231,7 +231,7 @@ export default function ProfilePage() {
                 {showQR ? (
                   <div className="space-y-4">
                     <div className="p-4 bg-white rounded-lg inline-block">
-                      <QRCode value={qrCodeData || "placeholder"} />
+                      <QRCodeSVG value={qrCodeData || "placeholder"} />
                     </div>
                     <div className="space-y-2">
                       <input

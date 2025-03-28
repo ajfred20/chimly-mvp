@@ -1,6 +1,6 @@
 "use client";
 
-import { GithubIcon, SlackIcon } from "lucide-react";
+import { Eye, EyeOff, GithubIcon, SlackIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -10,6 +10,7 @@ export default function SignUpPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [username, setName] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
@@ -100,14 +101,28 @@ export default function SignUpPage() {
             <label htmlFor="password" className="block text-sm text-zinc-400">
               Password
             </label>
-            <input
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Create a password"
-              className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
-              required
-            />
+            <div className="relative">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Create a password"
+                className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-300"
+              >
+                {showPassword ? (
+                  <Eye className="h-5 w-5" />
+                ) : (
+                  <EyeOff className="h-5 w-5" />
+                )}
+              </button>
+            </div>
           </div>
 
           <button
